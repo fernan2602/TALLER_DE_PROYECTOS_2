@@ -1,0 +1,12 @@
+# PASOS PARA INSTALACIÓN 
+
+-> 1 : composer create-project laravel/laravel NutriGym
+
+# DEPENDENCIAS DEL FRONTEND  
+
+-> 2 :  NPM INSTALL 
+
+FRONTEND 
+
+-> 3 : npm install tailwindcss @tailwindcss/vite 
+-> 4 : npm install alpinejs
