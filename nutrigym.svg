@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg
+PUBLIC "-//W3C//DTD SVG 1.1//EN"
+       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="223 119 1388 828" width="1165px" height="709px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <line x1="947" y1="442" x2="937" y2="442" style="stroke:#333;stroke-width:1;"/>
+   <line x1="896" y1="421" x2="886" y2="421" style="stroke:#333;stroke-width:1;"/>
+   <line x1="937" y1="442" x2="896" y2="421" style="stroke:#333;stroke-width:1;"/>
+   <line x1="939.5" y1="442" x2="943.03553390593" y2="445.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="939.5" y1="442" x2="943.03553390593" y2="438.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="891" y1="421" x2="894.53553390593" y2="424.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="891" y1="421" x2="894.53553390593" y2="417.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="947" y1="462" x2="937" y2="462" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="938" y1="311" x2="948" y2="311" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="937" y1="462" x2="938" y2="311" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="939.5" y1="462" x2="943.03553390593" y2="465.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="939.5" y1="462" x2="943.03553390593" y2="458.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="943" y1="311" x2="939.46446609407" y2="314.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="943" y1="311" x2="939.46446609407" y2="307.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="582" y1="184" x2="592" y2="184" style="stroke:#c00;stroke-width:1;"/>
+   <line x1="744" y1="421" x2="754" y2="421" style="stroke:#c00;stroke-width:1;"/>
+   <line x1="592" y1="184" x2="744" y2="421" style="stroke:#c00;stroke-width:1;"/>
+   <line x1="589.5" y1="184" x2="585.96446609407" y2="187.53553390593" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="589.5" y1="184" x2="585.96446609407" y2="180.46446609407" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="749" y1="421" x2="745.46446609407" y2="424.53553390593" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="749" y1="421" x2="745.46446609407" y2="417.46446609407" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="437" y1="204" x2="427" y2="204" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="344" y1="164" x2="334" y2="164" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="427" y1="204" x2="344" y2="164" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="429.5" y1="204" x2="433.03553390593" y2="207.53553390593" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="429.5" y1="204" x2="433.03553390593" y2="200.46446609407" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="339" y1="164" x2="342.53553390593" y2="167.53553390593" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="339" y1="164" x2="342.53553390593" y2="160.46446609407" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="948" y1="645" x2="938" y2="645" style="stroke:#333;stroke-width:1;"/>
+   <line x1="896" y1="421" x2="886" y2="421" style="stroke:#333;stroke-width:1;"/>
+   <line x1="938" y1="645" x2="896" y2="421" style="stroke:#333;stroke-width:1;"/>
+   <line x1="940.5" y1="645" x2="944.03553390593" y2="648.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="940.5" y1="645" x2="944.03553390593" y2="641.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="891" y1="421" x2="894.53553390593" y2="424.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="891" y1="421" x2="894.53553390593" y2="417.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="948" y1="665" x2="938" y2="665" style="stroke:#333;stroke-width:1;"/>
+   <line x1="937" y1="762" x2="947" y2="762" style="stroke:#333;stroke-width:1;"/>
+   <line x1="938" y1="665" x2="937" y2="762" style="stroke:#333;stroke-width:1;"/>
+   <line x1="940.5" y1="665" x2="944.03553390593" y2="668.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="940.5" y1="665" x2="944.03553390593" y2="661.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="942" y1="762" x2="938.46446609407" y2="765.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="942" y1="762" x2="938.46446609407" y2="758.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="667" y1="439" x2="677" y2="439" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="744" y1="421" x2="754" y2="421" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="677" y1="439" x2="744" y2="421" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="674.5" y1="439" x2="670.96446609407" y2="442.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="674.5" y1="439" x2="670.96446609407" y2="435.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="749" y1="421" x2="745.46446609407" y2="424.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="749" y1="421" x2="745.46446609407" y2="417.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1257" y1="312" x2="1247" y2="312" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="1025" y1="311" x2="1015" y2="311" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="1247" y1="312" x2="1025" y2="311" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="1249.5" y1="312" x2="1253.0355339059" y2="315.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1249.5" y1="312" x2="1253.0355339059" y2="308.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1020" y1="311" x2="1023.5355339059" y2="314.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1020" y1="311" x2="1023.5355339059" y2="307.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1257" y1="332" x2="1247" y2="332" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1250" y1="516" x2="1260" y2="516" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1247" y1="332" x2="1250" y2="516" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1249.5" y1="332" x2="1253.0355339059" y2="335.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1249.5" y1="332" x2="1253.0355339059" y2="328.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1255" y1="516" x2="1251.4644660941" y2="519.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1255" y1="516" x2="1251.4644660941" y2="512.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="388" y1="439" x2="398" y2="439" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="471" y1="419" x2="481" y2="419" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="398" y1="439" x2="471" y2="419" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="395.5" y1="439" x2="391.96446609407" y2="442.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="395.5" y1="439" x2="391.96446609407" y2="435.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="476" y1="419" x2="472.46446609407" y2="422.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="476" y1="419" x2="472.46446609407" y2="415.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="1257" y1="783" x2="1247" y2="783" style="stroke:#333;stroke-width:1;"/>
+   <line x1="1065" y1="762" x2="1055" y2="762" style="stroke:#333;stroke-width:1;"/>
+   <line x1="1247" y1="783" x2="1065" y2="762" style="stroke:#333;stroke-width:1;"/>
+   <line x1="1249.5" y1="783" x2="1253.0355339059" y2="786.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="1249.5" y1="783" x2="1253.0355339059" y2="779.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="1060" y1="762" x2="1063.5355339059" y2="765.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="1060" y1="762" x2="1063.5355339059" y2="758.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="1257" y1="803" x2="1247" y2="803" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1250" y1="516" x2="1260" y2="516" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1247" y1="803" x2="1250" y2="516" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1249.5" y1="803" x2="1253.0355339059" y2="806.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1249.5" y1="803" x2="1253.0355339059" y2="799.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1255" y1="516" x2="1251.4644660941" y2="519.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1255" y1="516" x2="1251.4644660941" y2="512.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="754" y1="561" x2="744" y2="561" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="745" y1="641" x2="755" y2="641" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="744" y1="561" x2="745" y2="641" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="746.5" y1="561" x2="750.03553390593" y2="564.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="746.5" y1="561" x2="750.03553390593" y2="557.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="750" y1="641" x2="746.46446609407" y2="644.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="750" y1="641" x2="746.46446609407" y2="637.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <rect width="88" height="20" x="1260" y="486" style="fill:#007;stroke:black;"/>
+   <text width="88" height="20" x="1265" y="500" style="fill:#fff;" font-family="Arial" font-size="16px"> alimento</text>
+   <rect width="88" height="20" x="1260" y="506" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="1265" y="520" style="fill:black;" font-family="Arial" font-size="16px">id_alimento</text>
+   <rect width="88" height="20" x="1260" y="526" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="1265" y="540" style="fill:black;" font-family="Arial" font-size="16px">nombre</text>
+   <rect width="88" height="20" x="1260" y="546" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="1265" y="560" style="fill:black;" font-family="Arial" font-size="16px">categoria</text>
+   <rect width="131" height="20" x="947" y="392" style="fill:#007;stroke:black;"/>
+   <text width="131" height="20" x="952" y="406" style="fill:#fff;" font-family="Arial" font-size="16px"> asignacion_menu</text>
+   <rect width="131" height="20" x="947" y="412" style="fill:none;stroke:black;"/>
+   <text width="131" height="20" x="952" y="426" style="fill:black;" font-family="Arial" font-size="16px">id_asignacion</text>
+   <rect width="131" height="20" x="947" y="432" style="fill:none;stroke:black;"/>
+   <text width="131" height="20" x="952" y="446" style="fill:black;" font-family="Arial" font-size="16px">id_usuario</text>
+   <rect width="131" height="20" x="947" y="452" style="fill:none;stroke:black;"/>
+   <text width="131" height="20" x="952" y="466" style="fill:black;" font-family="Arial" font-size="16px">id_menu</text>
+   <rect width="131" height="20" x="947" y="472" style="fill:none;stroke:black;"/>
+   <text width="131" height="20" x="952" y="486" style="fill:black;" font-family="Arial" font-size="16px">fecha_asignacion</text>
+   <rect width="145" height="20" x="437" y="134" style="fill:#007;stroke:black;"/>
+   <text width="145" height="20" x="442" y="148" style="fill:#fff;" font-family="Arial" font-size="16px"> asignacion_objetivo</text>
+   <rect width="145" height="20" x="437" y="154" style="fill:none;stroke:black;"/>
+   <text width="145" height="20" x="442" y="168" style="fill:black;" font-family="Arial" font-size="16px">id_asignacion</text>
+   <rect width="145" height="20" x="437" y="174" style="fill:none;stroke:black;"/>
+   <text width="145" height="20" x="442" y="188" style="fill:black;" font-family="Arial" font-size="16px">id_usuario</text>
+   <rect width="145" height="20" x="437" y="194" style="fill:none;stroke:black;"/>
+   <text width="145" height="20" x="442" y="208" style="fill:black;" font-family="Arial" font-size="16px">id_objetivo</text>
+   <rect width="145" height="20" x="437" y="214" style="fill:none;stroke:black;"/>
+   <text width="145" height="20" x="442" y="228" style="fill:black;" font-family="Arial" font-size="16px">fecha_asignacion</text>
+   <rect width="145" height="20" x="437" y="234" style="fill:none;stroke:black;"/>
+   <text width="145" height="20" x="442" y="248" style="fill:black;" font-family="Arial" font-size="16px">calificacion</text>
+   <rect width="145" height="20" x="437" y="254" style="fill:none;stroke:black;"/>
+   <text width="145" height="20" x="442" y="268" style="fill:black;" font-family="Arial" font-size="16px">estado</text>
+   <rect width="171" height="20" x="948" y="595" style="fill:#007;stroke:black;"/>
+   <text width="171" height="20" x="953" y="609" style="fill:#fff;" font-family="Arial" font-size="16px"> asignacion_preferencia</text>
+   <rect width="171" height="20" x="948" y="615" style="fill:none;stroke:black;"/>
+   <text width="171" height="20" x="953" y="629" style="fill:black;" font-family="Arial" font-size="16px">id_asignacion</text>
+   <rect width="171" height="20" x="948" y="635" style="fill:none;stroke:black;"/>
+   <text width="171" height="20" x="953" y="649" style="fill:black;" font-family="Arial" font-size="16px">id_usuario</text>
+   <rect width="171" height="20" x="948" y="655" style="fill:none;stroke:black;"/>
+   <text width="171" height="20" x="953" y="669" style="fill:black;" font-family="Arial" font-size="16px">id_preferencia</text>
+   <rect width="171" height="20" x="948" y="675" style="fill:none;stroke:black;"/>
+   <text width="171" height="20" x="953" y="689" style="fill:black;" font-family="Arial" font-size="16px">fecha</text>
+   <rect width="186" height="20" x="481" y="389" style="fill:#007;stroke:black;"/>
+   <text width="186" height="20" x="486" y="403" style="fill:#fff;" font-family="Arial" font-size="16px"> medidas</text>
+   <rect width="186" height="20" x="481" y="409" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="423" style="fill:black;" font-family="Arial" font-size="16px">id_medida</text>
+   <rect width="186" height="20" x="481" y="429" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="443" style="fill:black;" font-family="Arial" font-size="16px">id_usuario</text>
+   <rect width="186" height="20" x="481" y="449" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="463" style="fill:black;" font-family="Arial" font-size="16px">peso</text>
+   <rect width="186" height="20" x="481" y="469" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="483" style="fill:black;" font-family="Arial" font-size="16px">talla</text>
+   <rect width="186" height="20" x="481" y="489" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="503" style="fill:black;" font-family="Arial" font-size="16px">edad</text>
+   <rect width="186" height="20" x="481" y="509" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="523" style="fill:black;" font-family="Arial" font-size="16px">genero</text>
+   <rect width="186" height="20" x="481" y="529" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="543" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_brazo</text>
+   <rect width="186" height="20" x="481" y="549" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="563" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_antebrazo</text>
+   <rect width="186" height="20" x="481" y="569" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="583" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_cintura</text>
+   <rect width="186" height="20" x="481" y="589" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="603" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_caderas</text>
+   <rect width="186" height="20" x="481" y="609" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="623" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_muslos</text>
+   <rect width="186" height="20" x="481" y="629" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="643" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_pantorrilla</text>
+   <rect width="186" height="20" x="481" y="649" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="663" style="fill:black;" font-family="Arial" font-size="16px">circunferencia_cuello</text>
+   <rect width="186" height="20" x="481" y="669" style="fill:none;stroke:black;"/>
+   <text width="186" height="20" x="486" y="683" style="fill:black;" font-family="Arial" font-size="16px">fecha_registro</text>
+   <rect width="67" height="20" x="948" y="281" style="fill:#007;stroke:black;"/>
+   <text width="67" height="20" x="953" y="295" style="fill:#fff;" font-family="Arial" font-size="16px"> menu</text>
+   <rect width="67" height="20" x="948" y="301" style="fill:none;stroke:black;"/>
+   <text width="67" height="20" x="953" y="315" style="fill:black;" font-family="Arial" font-size="16px">id_menu</text>
+   <rect width="67" height="20" x="948" y="321" style="fill:none;stroke:black;"/>
+   <text width="67" height="20" x="953" y="335" style="fill:black;" font-family="Arial" font-size="16px">tipo</text>
+   <rect width="67" height="20" x="948" y="341" style="fill:none;stroke:black;"/>
+   <text width="67" height="20" x="953" y="355" style="fill:black;" font-family="Arial" font-size="16px">fecha</text>
+   <rect width="116" height="20" x="1257" y="282" style="fill:#007;stroke:black;"/>
+   <text width="116" height="20" x="1262" y="296" style="fill:#fff;" font-family="Arial" font-size="16px"> menu_alimento</text>
+   <rect width="116" height="20" x="1257" y="302" style="fill:none;stroke:black;"/>
+   <text width="116" height="20" x="1262" y="316" style="fill:black;" font-family="Arial" font-size="16px">id_menu</text>
+   <rect width="116" height="20" x="1257" y="322" style="fill:#aea;stroke:black;"/>
+   <text width="116" height="20" x="1262" y="336" style="fill:black;" font-family="Arial" font-size="16px">id_alimento</text>
+   <rect width="91" height="20" x="243" y="134" style="fill:#007;stroke:black;"/>
+   <text width="91" height="20" x="248" y="148" style="fill:#fff;" font-family="Arial" font-size="16px"> objetivo</text>
+   <rect width="91" height="20" x="243" y="154" style="fill:none;stroke:black;"/>
+   <text width="91" height="20" x="248" y="168" style="fill:black;" font-family="Arial" font-size="16px">id_objetivo</text>
+   <rect width="91" height="20" x="243" y="174" style="fill:none;stroke:black;"/>
+   <text width="91" height="20" x="248" y="188" style="fill:black;" font-family="Arial" font-size="16px">nombre</text>
+   <rect width="91" height="20" x="243" y="194" style="fill:none;stroke:black;"/>
+   <text width="91" height="20" x="248" y="208" style="fill:black;" font-family="Arial" font-size="16px">descripcion</text>
+   <rect width="108" height="20" x="947" y="732" style="fill:#007;stroke:black;"/>
+   <text width="108" height="20" x="952" y="746" style="fill:#fff;" font-family="Arial" font-size="16px"> preferencia</text>
+   <rect width="108" height="20" x="947" y="752" style="fill:none;stroke:black;"/>
+   <text width="108" height="20" x="952" y="766" style="fill:black;" font-family="Arial" font-size="16px">id_preferencia</text>
+   <rect width="108" height="20" x="947" y="772" style="fill:none;stroke:black;"/>
+   <text width="108" height="20" x="952" y="786" style="fill:black;" font-family="Arial" font-size="16px">tipo</text>
+   <rect width="108" height="20" x="947" y="792" style="fill:none;stroke:black;"/>
+   <text width="108" height="20" x="952" y="806" style="fill:black;" font-family="Arial" font-size="16px">descripcion</text>
+   <rect width="150" height="20" x="238" y="389" style="fill:#007;stroke:black;"/>
+   <text width="150" height="20" x="243" y="403" style="fill:#fff;" font-family="Arial" font-size="16px"> progreso</text>
+   <rect width="150" height="20" x="238" y="409" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="423" style="fill:black;" font-family="Arial" font-size="16px">id_progreso</text>
+   <rect width="150" height="20" x="238" y="429" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="443" style="fill:black;" font-family="Arial" font-size="16px">id_medida</text>
+   <rect width="150" height="20" x="238" y="449" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="463" style="fill:black;" font-family="Arial" font-size="16px">fecha</text>
+   <rect width="150" height="20" x="238" y="469" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="483" style="fill:black;" font-family="Arial" font-size="16px">imc</text>
+   <rect width="150" height="20" x="238" y="489" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="503" style="fill:black;" font-family="Arial" font-size="16px">tmb</text>
+   <rect width="150" height="20" x="238" y="509" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="523" style="fill:black;" font-family="Arial" font-size="16px">porcentaje_grasa</text>
+   <rect width="150" height="20" x="238" y="529" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="543" style="fill:black;" font-family="Arial" font-size="16px">masa_grasa</text>
+   <rect width="150" height="20" x="238" y="549" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="563" style="fill:black;" font-family="Arial" font-size="16px">masa_magra</text>
+   <rect width="150" height="20" x="238" y="569" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="583" style="fill:black;" font-family="Arial" font-size="16px">masa_muscular</text>
+   <rect width="150" height="20" x="238" y="589" style="fill:none;stroke:black;"/>
+   <text width="150" height="20" x="243" y="603" style="fill:black;" font-family="Arial" font-size="16px">porcentaje_musculo</text>
+   <rect width="108" height="20" x="1257" y="733" style="fill:#007;stroke:black;"/>
+   <text width="108" height="20" x="1262" y="747" style="fill:#fff;" font-family="Arial" font-size="16px"> restriccion</text>
+   <rect width="108" height="20" x="1257" y="753" style="fill:none;stroke:black;"/>
+   <text width="108" height="20" x="1262" y="767" style="fill:black;" font-family="Arial" font-size="16px">id_restriccion</text>
+   <rect width="108" height="20" x="1257" y="773" style="fill:none;stroke:black;"/>
+   <text width="108" height="20" x="1262" y="787" style="fill:black;" font-family="Arial" font-size="16px">id_preferencia</text>
+   <rect width="108" height="20" x="1257" y="793" style="fill:none;stroke:black;"/>
+   <text width="108" height="20" x="1262" y="807" style="fill:black;" font-family="Arial" font-size="16px">id_alimento</text>
+   <rect width="87" height="20" x="755" y="611" style="fill:#007;stroke:black;"/>
+   <text width="87" height="20" x="760" y="625" style="fill:#fff;" font-family="Arial" font-size="16px"> rol</text>
+   <rect width="87" height="20" x="755" y="631" style="fill:none;stroke:black;"/>
+   <text width="87" height="20" x="760" y="645" style="fill:black;" font-family="Arial" font-size="16px">id_rol</text>
+   <rect width="87" height="20" x="755" y="651" style="fill:none;stroke:black;"/>
+   <text width="87" height="20" x="760" y="665" style="fill:black;" font-family="Arial" font-size="16px">nombre_rol</text>
+   <rect width="132" height="20" x="754" y="391" style="fill:#007;stroke:black;"/>
+   <text width="132" height="20" x="759" y="405" style="fill:#fff;" font-family="Arial" font-size="16px"> usuario</text>
+   <rect width="132" height="20" x="754" y="411" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="425" style="fill:black;" font-family="Arial" font-size="16px">id_usuario</text>
+   <rect width="132" height="20" x="754" y="431" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="445" style="fill:black;" font-family="Arial" font-size="16px">nombre</text>
+   <rect width="132" height="20" x="754" y="451" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="465" style="fill:black;" font-family="Arial" font-size="16px">email</text>
+   <rect width="132" height="20" x="754" y="471" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="485" style="fill:black;" font-family="Arial" font-size="16px">fecha_nacimiento</text>
+   <rect width="132" height="20" x="754" y="491" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="505" style="fill:black;" font-family="Arial" font-size="16px">contrasena</text>
+   <rect width="132" height="20" x="754" y="511" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="525" style="fill:black;" font-family="Arial" font-size="16px">fecha_registro</text>
+   <rect width="132" height="20" x="754" y="531" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="545" style="fill:black;" font-family="Arial" font-size="16px">fecha_cese</text>
+   <rect width="132" height="20" x="754" y="551" style="fill:none;stroke:black;"/>
+   <text width="132" height="20" x="759" y="565" style="fill:black;" font-family="Arial" font-size="16px">id_rol</text>
+</svg>
