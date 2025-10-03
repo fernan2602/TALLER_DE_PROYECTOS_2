@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medidas', function (Blueprint $table) {
+    Schema::create('menu_alimentos', function (Blueprint $table) {
         $table->id();
-        $table->decimal('hombros');
-        $table->decimal('brazo');
-        $table->decimal('antebrazo');
-        $table->decimal('cintura');
-        $table->decimal('caderas');
-        $table->decimal('muslos');
-        $table->decimal('pantorrilla');
+        $table->foreignId('id_menu')
+            ->constrained('menus')
+            ->onDelete('cascade');
+        $table->foreignId('id_alimento')
+            ->constrained('alimentos')
+            ->onDelete('cascade');
         $table->timestamps();
     });
+
     }
 
     /**
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medidas');
+        Schema::dropIfExists('menu_alimentos');
     }
 };

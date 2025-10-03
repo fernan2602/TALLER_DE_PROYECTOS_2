@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registers', function (Blueprint $table) {
-        $table->id();
-        $table->decimal('peso'); // 
-        $table->decimal('talla'); //
-        $table->integer('edad');
-        $table->enum('genero', ['masculino', 'femenino', 'otro']);
+    Schema::create('menus', function (Blueprint $table) {
+        $table->id('id');
+        $table->enum('tipo', ['desayuno','almuerzo','cena','otro']);
+        $table->date('fecha');
         $table->timestamps();
     });
+
     }
-    
+
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('register');
+        Schema::dropIfExists('menu');
     }
 };

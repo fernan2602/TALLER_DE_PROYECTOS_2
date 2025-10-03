@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('promedio', function (Blueprint $table) {
-            $table->id();
-            $table->string('edad'); 
-            $table->enum('genero', ['masculino', 'femenino']);
-            $table->decimal('pliegue_tricipital');
-            $table->decimal('fuerza')->nullable();
+        Schema::create('preferencias', function (Blueprint $table) {
+            $table->id('id');
+            $table->enum('tipo', ['dieta','alergia']);
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('promedio');
+        Schema::dropIfExists('preferencia');
     }
 };
