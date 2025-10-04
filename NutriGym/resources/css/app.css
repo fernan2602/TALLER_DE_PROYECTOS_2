@@ -1,10 +1,58 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../views';
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+/* Rutas que Tailwind debe escanear */
+@source "../views/**/*.blade.php";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 
+/* Tema y variables globales */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #4CAF50;    /* verde */
+  --color-primary-light: #A5D6A7;
+  --color-accent: #FF9800;     /* naranja */
+  --color-bg: #FFFFFF;
+  --color-surface: #F6F7F9;
+  --shadow-dark: rgba(0,0,0,0.12);
+  --shadow-light: rgba(255,255,255,1);
 }
 
+/* Componentes neumorfismo y utilidades */
+@layer components {
+  .neumorphic {
+    background: var(--color-bg);
+    border-radius: 12px;
+    box-shadow: 8px 8px 16px var(--shadow-dark),
+                -8px -8px 16px var(--shadow-light);
+  }
 
+  .neumorphic-inset {
+    box-shadow: inset 6px 6px 12px rgba(0,0,0,0.08),
+                inset -6px -6px 12px #ffffff;
+  }
+
+  .btn-neu {
+    @apply rounded-full px-6 py-3 text-white font-semibold;
+    background: var(--color-primary);
+    box-shadow: 6px 6px 12px var(--shadow-dark),
+                -6px -6px 12px var(--shadow-light);
+    transition: background .2s, transform .08s;
+  }
+  .btn-neu:hover { background: var(--color-accent); transform: translateY(-1px); }
+  .btn-neu:disabled { @apply bg-gray-300 pointer-events-none; box-shadow: none; }
+
+  .input-neu {
+    @apply w-full px-4 py-2 rounded-lg border;
+    border-color: #000000;
+    background: #ffffff;
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06),
+                inset -4px -4px 8px #ffffff;
+  }
+  .input-neu:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: inset 6px 6px 12px rgba(0,0,0,0.06),
+                inset -6px -6px 12px #ffffff;
+  }
+}
