@@ -1,0 +1,69 @@
+
+
+1. tabla de registros para calcular el estado del usuario.. 
+2. Datos : medidas corporales
+		a. peso 
+		b. talla 
+		c. cuello
+		d. hombros, brazo, antebrazo, cintura, caderas, mustos, pantorrilla -> circunferencia 
+=> Genero es importante. 
+
+3. Dividir en tablas. 
+
+	-> Register : peso, talla , edad, genero 
+	-> Medidas : las circunferencias de  hombros, brazo, antebrazo, cintura, caderas, muslos, pantorrilla
+	-> Promedios :  segun-edad (string de 0 - 5 años intervalos de 5 años hasta 70),genero , Pliegue tripicial, fuerza 
+
+	-> Progreso : área-muscular-brazo y pantorrilla, muslos -> circunferencia del brazo; masa-muscular -> (peso(1-(0.2)/100)) / talla * talla ; 
+
+Indice cintura/cadera : circunferencia-cintura/circunferencia-cadera; 
+Indice de la fuerza : fuerza-promedio / peso
+
+4.1. Seed
+	a. Promedios :  en mm tabla de datos link : 
+https://ve.scielo.org/scielo.php?script=sci_arttext&pid=S0004-06222009000400005	
+edad 	genero plielgue tripicial
+16–19	M 	12,35	
+16–19 	F 21,57
+20–24	M 12,12	
+20–24	F 21,87
+25–29	F 12,33	
+25–29	M 21,56
+30–39	M 12,31	
+30–39	F 22,08
+40–49	M 12,31	
+40–49	F 22,61
+50–59	M 12,20	 
+50–59	F 24,21
+60–69	M 12,29	
+60–69	F 18,41 
+
+4.2. Relaciones 
+
+Estado -> 
+Medidas -> 
+Promedios ->  Se relacionan mediante una consulta para el backend donde query = tabla registers -> genero  .   Previament
+Progreso -> 
+
+
+•	Progreso
+o	id_progreso: P001
+o	id_medida: Llave foránea
+o	fecha: Fecha del registro.
+o	imc: Índice de masa corporal. (peso (kg)/talla*talla m)
+o	tmb: Tasa metabólica basal.
+	TMB para Hombres = (10 × peso en kg) + (6,25 × altura en cm) – (5 × edad en años) + 5
+	TMB para Mujeres = (10 × peso en kg) + (6,25 × altura en cm) – (5 × edad en años) – 161
+o	porcentaje_grasa: % de grasa corporal.
+% de grasa corporal = –44.988 + (0.503 × edad) + (10.689 × sexo) + (3.172 × IMC) – (0.026 × IMC²) + (0.181 × IMC × sexo) – (0.02 × IMC × edad) – (0.005 × IMC² × sexo) + (0.00021 × IMC² × edad)
+Sexo : Femenino = 1 , Masculino =  0
+o	masa_grasa : 
+	Fórmula Masa Grasa Hombres (kg): [495 / {1.0324 - 0.19077 [longitud (cintura- cuello)] + 0.15456 [altura]}-450]*peso
+	Fórmula de Masa Grasa Mujeres (%): [495 / {1.29579 - 0.35004 [longitud (cintura+caderas-cuello)] + 0.22100 [altura]}. – 450] * peso 
+o	masa_magra :  Peso – masa_grasa
+o	masa_muscular : masa_magra * 0.55  
+o	porcentaje_musculo: % de músculo : (masa_muscular / peso) * 100	
+
+
+
+

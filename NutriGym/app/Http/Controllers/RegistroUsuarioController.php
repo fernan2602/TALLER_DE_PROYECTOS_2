@@ -34,7 +34,7 @@ class RegistroUsuarioController extends Controller
 
         Auth::login($usuario);
 
-        return redirect()->route('dashboard')->with('success', 'Usuario registrado correctamente.');
+        return redirect()->route('registrar_usuario')->with('success', 'Usuario registrado correctamente.');
 
     } catch (\Exception $e) {
         // Redirige de vuelta al formulario con un flag de error

@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroUsuarioController;
 use App\Http\Controllers\LoginUsuarioController;
 
+
+// Redirigir la raíz al login
+Route::get('/', function () {
+    return redirect('/login');
+});
+
 // Registro
 Route::get('/registrar_usuario', function () {
     return view('usuario.registrar_usuario');
@@ -18,13 +24,14 @@ Route::get('/dashboard', function() {
 })->name('dashboard');
 
 
-/*Login
+
+
 Route::get('/login', function () {
     return view('usuario.login');
 })->name('login');
 
-Route::post('/login', [LoginUsuarioController::class, 'authenticate'])
+Route::post('/login', [LoginUsuarioController::class, 'validacion'])
     ->name('login.store');
 
-*/
+
     ?>

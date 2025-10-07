@@ -2,23 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Rutas que Tailwind debe escanear */
-@source "../views/**/*.blade.php";
-@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
-
-/* Tema y variables globales */
-@theme {
+/* Variables globales */
+:root {
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #4CAF50;    /* verde */
+  --color-primary: #4CAF50;
   --color-primary-light: #A5D6A7;
-  --color-accent: #FF9800;     /* naranja */
+  --color-accent: #FF9800;
   --color-bg: #FFFFFF;
   --color-surface: #F6F7F9;
   --shadow-dark: rgba(0,0,0,0.12);
   --shadow-light: rgba(255,255,255,1);
 }
 
-/* Componentes neumorfismo y utilidades */
+/* Componentes neumórficos */
 @layer components {
   .neumorphic {
     background: var(--color-bg);
@@ -39,8 +35,16 @@
                 -6px -6px 12px var(--shadow-light);
     transition: background .2s, transform .08s;
   }
-  .btn-neu:hover { background: var(--color-accent); transform: translateY(-1px); }
-  .btn-neu:disabled { @apply bg-gray-300 pointer-events-none; box-shadow: none; }
+  
+  .btn-neu:hover { 
+    background: var(--color-accent); 
+    transform: translateY(-1px); 
+  }
+  
+  .btn-neu:disabled { 
+    @apply bg-gray-300 pointer-events-none; 
+    box-shadow: none; 
+  }
 
   .input-neu {
     @apply w-full px-4 py-2 rounded-lg border;
@@ -49,6 +53,7 @@
     box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06),
                 inset -4px -4px 8px #ffffff;
   }
+  
   .input-neu:focus {
     outline: none;
     border-color: var(--color-primary);

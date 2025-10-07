@@ -5,67 +5,69 @@
         openModal: false, 
         openErrorModal: {{ session('error') ? 'true' : 'false' }},
         openSuccessModal: {{ session('success') ? 'true' : 'false' }}
-    }" class="max-w-md mx-auto bg-white p-6 rounded shadow mt-10">
+    }" class="min-h-screen flex items-center justify-center bg-[var(--color-surface)] py-8">
 
-    <h1 class="text-2xl font-bold mb-6 text-center">Registrar Usuario</h1>
+    <div class="w-full max-w-md p-8 neumorphic">
+        <h1 class="text-2xl font-bold text-center mb-6 text-[var(--color-primary)]">Registrar Usuario</h1>
 
-    <!-- Formulario -->
-    <form x-ref="registroForm" method="POST" action="{{ route('registrar_usuario.store') }}">
-        @csrf
+        <!-- Formulario -->
+        <form x-ref="registroForm" method="POST" action="{{ route('registrar_usuario.store') }}">
+            @csrf
 
-        <div class="mb-4">
-            <label class="block mb-1 font-medium">Nombre</label>
-            <input type="text" name="nombre" class="w-full border rounded px-3 py-2" value="{{ old('nombre') }}" required>
-            @error('nombre') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
-        </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Nombre</label>
+                <input type="text" name="nombre" class="input-neu" value="{{ old('nombre') }}" required>
+                @error('nombre') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
 
-        <div class="mb-4">
-            <label class="block mb-1 font-medium">Email</label>
-            <input type="email" name="email" class="w-full border rounded px-3 py-2" value="{{ old('email') }}" required>
-            @error('email') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
-        </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" name="email" class="input-neu" value="{{ old('email') }}" required>
+                @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
 
-        <div class="mb-4">
-            <label class="block mb-1 font-medium">Fecha de nacimiento</label>
-            <input type="date" name="fecha_nacimiento" class="w-full border rounded px-3 py-2" value="{{ old('fecha_nacimiento') }}" required>
-            @error('fecha_nacimiento') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
-        </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Fecha de nacimiento</label>
+                <input type="date" name="fecha_nacimiento" class="input-neu" value="{{ old('fecha_nacimiento') }}" required>
+                @error('fecha_nacimiento') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
 
-        <div class="mb-4">
-            <label class="block mb-1 font-medium">Contraseña</label>
-            <input type="password" name="contrasena" class="w-full border rounded px-3 py-2" required>
-            @error('contrasena') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
-        </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Contraseña</label>
+                <input type="password" name="contrasena" class="input-neu" required>
+                @error('contrasena') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
 
-        <div class="mb-4">
-            <label class="block mb-1 font-medium">Confirmar Contraseña</label>
-            <input type="password" name="contrasena_confirmation" class="w-full border rounded px-3 py-2" required>
-        </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-1">Confirmar Contraseña</label>
+                <input type="password" name="contrasena_confirmation" class="input-neu" required>
+            </div>
 
-        <!-- Botón que abre el modal de confirmación -->
-        <button type="button" @click="openModal = true" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">
-            Registrarse
-        </button>
-    </form>
+            <!-- Botón que abre el modal de confirmación -->
+            <button type="button" @click="openModal = true" class="btn-neu w-full text-center">
+                Registrarse
+            </button>
+        </form>
+    </div>
 
     <!-- Modal de confirmación -->
     <div x-show="openModal" x-transition class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div class="bg-white max-w-md w-full rounded-xl overflow-hidden p-6">
-            <h2 class="text-2xl font-bold mb-4 text-center">Confirmar registro</h2>
+        <div class="w-full max-w-md p-8 neumorphic mx-4">
+            <h2 class="text-2xl font-bold text-center mb-4 text-[var(--color-primary)]">Confirmar registro</h2>
             <p class="text-gray-600 mb-6 text-center">¿Deseas continuar con el registro de este usuario?</p>
 
             <div class="flex space-x-3">
                 <!-- Confirmar -->
                 <button type="button" 
                         @click="$refs.registroForm.submit(); openModal = false" 
-                        class="flex-1 p-3 bg-green-500 text-white rounded hover:bg-green-600">
+                        class="btn-neu flex-1">
                     Confirmar
                 </button>
 
                 <!-- Cancelar -->
                 <button type="button" 
                         @click="openModal = false" 
-                        class="flex-1 p-3 bg-gray-300 rounded hover:bg-gray-400">
+                        class="btn-neu flex-1 bg-gray-300 text-gray-700 hover:bg-gray-400">
                     Cancelar
                 </button>
             </div>
@@ -74,13 +76,13 @@
 
     <!-- Modal de error -->
     <div x-show="openErrorModal" x-transition class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div class="bg-white max-w-md w-full rounded-xl overflow-hidden p-6">
-            <h2 class="text-2xl font-bold mb-4 text-center text-red-600">Error</h2>
+        <div class="w-full max-w-md p-8 neumorphic mx-4">
+            <h2 class="text-2xl font-bold text-center mb-4 text-red-600">Error</h2>
             <p class="text-gray-700 mb-6 text-center">{{ session('error') }}</p>
 
             <div class="flex justify-center">
                 <button type="button" @click="openErrorModal = false"
-                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                    class="btn-neu bg-red-500 hover:bg-red-600">
                     Cerrar
                 </button>
             </div>
@@ -89,13 +91,13 @@
 
     <!-- Modal de éxito -->
     <div x-show="openSuccessModal" x-transition class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div class="bg-white max-w-md w-full rounded-xl overflow-hidden p-6">
-            <h2 class="text-2xl font-bold mb-4 text-center text-green-600">¡Éxito!</h2>
+        <div class="w-full max-w-md p-8 neumorphic mx-4">
+            <h2 class="text-2xl font-bold text-center mb-4 text-[var(--color-primary)]">¡Éxito!</h2>
             <p class="text-gray-700 mb-6 text-center">{{ session('success') }}</p>
 
             <div class="flex justify-center">
-                <button type="button" @click="openSuccessModal = false"
-                    class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                <button type="button" @click="openSuccessModal = false ; window.location.href='{{ route('login') }}'"
+                    class="btn-neu" >
                     Cerrar
                 </button>
             </div>
