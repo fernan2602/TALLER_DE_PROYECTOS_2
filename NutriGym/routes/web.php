@@ -3,6 +3,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroUsuarioController;
 use App\Http\Controllers\LoginUsuarioController;
+use App\Http\Controllers\PreferenciaController;
+use App\Http\Controllers\MedidaController;
 use Illuminate\Auth\Events\Logout;
 
 // Redirigir la raíz al login
@@ -20,7 +22,7 @@ Route::post('/registrar_usuario', [RegistroUsuarioController::class, 'store'])
     
 // Dashboard
 Route::get('/dashboard', function() {
-    return view('dashboard'); // o tu vista correspondiente
+    return view('dashboard'); // 
 })->name('dashboard');
 
 
@@ -38,13 +40,26 @@ Route::post('logout', function() {
     
     return redirect('/')->with('success', 'Sesión cerrada correctamente');
 })->name('logout');
+
+// control de usuarios
+Route::get('control', function() {
+    return view('admin.control'); // 
+})->name('control');
+
+// Mi cuenta
+Route::get('cuenta', [PreferenciaController::class, 'index'])->name('cuenta');
+
+// Registros medidas
+Route::post('/medidas', [MedidaController::class, 'store'])->name('medidas.store');
+
+
 // 
 Route::get('user', function() {
     return view('ui_dashboard.user'); // vista de usuario --> sin autenticar 
 })->name('user');
 
 
-
+// Login
 Route::get('/login', function () {
     return view('usuario.login');
 })->name('login');
