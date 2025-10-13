@@ -40,7 +40,8 @@ class Medida extends Model
         'circunferencia_muslos',
         'circunferencia_pantorrilla',
         'circunferencia_cuello',
-        'fecha_registro'
+        'fecha_registro',
+        'estado_fisico'
     ];
 
     /**
@@ -57,14 +58,18 @@ class Medida extends Model
         'circunferencia_pantorrilla' => 'decimal:2',
         'circunferencia_cuello' => 'decimal:2',
         'fecha_registro' => 'datetime',
-        'edad' => 'integer'
+        'edad' => 'integer',
+        'estado_fisico'=>'integer',
     ];
 
     /**
-     * Relación con el modelo User (Usuario)
+     * Relación con el modelo Usuario
      */
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'id_usuario');
     }
+
+
+
 }

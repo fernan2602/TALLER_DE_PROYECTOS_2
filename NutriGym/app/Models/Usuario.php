@@ -41,4 +41,24 @@ class Usuario extends Authenticatable
             'id_preferencia'
         )->withTimestamps();
     }
+
+    // Relacion medida 
+    public function medidas()
+    {
+        return $this->hasMany(Medida::class, 'id_usuario');
+    }
+
+    // Obtener medida --> ultimo registro
+    public function ultimaMedida()
+    {
+        return $this->medidas()
+        ->orderBy('created_at','desc')
+        ->first();
+    }
+
+    // Verificar usuario ya tiene registros 
+    public function existeMedida()
+    {
+        return $this->medidas()->exists();
+    }
 }

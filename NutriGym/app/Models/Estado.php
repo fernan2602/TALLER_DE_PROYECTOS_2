@@ -15,7 +15,7 @@ class Estado extends Model
     // Relación: relacion 1 --> todo usuario comienza con un estado y termina con otro
     public function usuarios()
     {
-        return $this->hasMany(Medida::class, 'id_estado');
+        return $this->hasMany(Medida::class, 'id_estado_fisico');
     }
 
 

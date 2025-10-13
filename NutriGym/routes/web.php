@@ -17,15 +17,18 @@ Route::get('/registrar_usuario', function () {
     return view('usuario.registrar_usuario');
 })->name('registrar_usuario');
 
+// Update de registro de medidas
+Route::put('/medidas/{id}',[MedidaController::class, 'update'])->name('medidas.update');
+
+
 Route::post('/registrar_usuario', [RegistroUsuarioController::class, 'store'])
     ->name('registrar_usuario.store');
     
 // Dashboard
+
 Route::get('/dashboard', function() {
     return view('dashboard'); // 
 })->name('dashboard');
-
-
 
 // Logout
 Route::get('logout',function(){

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      */
     public function up(): void
@@ -28,6 +28,7 @@ return new class extends Migration
         $table->decimal('circunferencia_pantorrilla', 5,2)->nullable();
         $table->decimal('circunferencia_cuello', 5,2)->nullable();
         $table->timestamp('fecha_registro')->useCurrent();
+        $table->integer('estado_fisico');
         $table->timestamps();
     });
 
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medida');
+        Schema::dropIfExists('medidas');
     }
 };

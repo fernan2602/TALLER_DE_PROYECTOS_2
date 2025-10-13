@@ -96,7 +96,7 @@
             <p class="text-gray-700 mb-6 text-center">{{ session('success') }}</p>
 
             <div class="flex justify-center">
-                <button type="button" @click="openSuccessModal = false ; window.location.href='{{ route('login') }}'"
+                <button type="button" @click="openSuccessModal = false ; window.location.href='{{ route('dashboard') }}'"
                     class="btn-neu" >
                     Cerrar
                 </button>
