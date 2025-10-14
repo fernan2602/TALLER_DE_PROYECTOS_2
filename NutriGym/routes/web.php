@@ -57,10 +57,21 @@ Route::post('/medidas', [MedidaController::class, 'store'])->name('medidas.store
 
 
 // 
-Route::get('user', function() {
-    return view('ui_dashboard.user'); // vista de usuario --> sin autenticar 
-})->name('user');
+Route::get('usuario', function() {
+    return view('ui_dashboard.usuario'); // vista de usuario --> autenticado
+})->name('usuario');
 
+Route::get('admin', function() {
+    return view('ui_dashboard.admin'); // vista de admin --> autenticado
+})->name('admin');
+
+Route::get('nutriologo', function() {
+    return view('ui_dashboard.nutriologo'); // vista de nutriologo --> autenticado
+})->name('nutriologo');
+
+Route::get('entrenador', function() {
+    return view('ui_dashboard.entrenador'); // vista de entrenador --> autenticado
+})->name('entrenador');
 
 // Login
 Route::get('/login', function () {
