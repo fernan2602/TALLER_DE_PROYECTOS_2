@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('contrasena');
             $table->timestamp('fecha_registro')->useCurrent();
             $table->timestamp('fecha_cese')->nullable();
-            $table->foreignId('id_rol')->default(4)
+            $table->foreignId('id_rol')->default(2)
                 ->constrained('roles')
                 ->onDelete('restrict');
             $table->timestamps();

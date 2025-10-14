@@ -7,7 +7,6 @@ use Database\Factories\PromedioFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesSeeder::class,
             PreferenciasSeeder::class,
-            ObjetivosSeeder::class
         ]);
     }
 }

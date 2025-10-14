@@ -30,7 +30,7 @@ class LoginUsuarioController extends Controller
             Auth::login($usuario);
             
             // Redirigir y enviar mensaje de ingreso 
-            return redirect()->intended('usuario')->with('succes','Bienvenido'.$usuario->nombre);
+            return redirect()->intended('/dashboard')->with('succes','Bienvenido'.$usuario->nombre);
         }
         // Si falla
         return back()->withErrors([

@@ -14,7 +14,7 @@ class PreferenciasSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('preferencias')->insert([
+            DB::table('preferencias')->insert([
             ['tipo' => 'dieta', 'descripcion' => 'Vegetariano', 'created_at' => now(), 'updated_at' => now()],
             ['tipo' => 'dieta', 'descripcion' => 'Vegano', 'created_at' => now(), 'updated_at' => now()],
             ['tipo' => 'dieta', 'descripcion' => 'Sin Gluten', 'created_at' => now(), 'updated_at' => now()],
