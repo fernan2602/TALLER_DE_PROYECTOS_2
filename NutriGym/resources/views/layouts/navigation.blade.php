@@ -21,9 +21,10 @@
             <!-- Menú desktop -->
             <div class="hidden md:flex items-center space-x-1">
                 @auth
-                    <!-- Usuario AUTENTICADO - Administrador -->
+                <!-- Usuario AUTENTICADO - Administrador -->
+                @if(Auth::user()->id_rol == 1)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
-                        👋 Hola, {{ Auth::user()->nombre }} (ID: {{ Auth::user()->id }})
+                        👋 Hola Administrador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
                     
                     @if(Route::has('control'))
@@ -43,7 +44,73 @@
                             🚪 Cerrar sesión
                         </a>
                     @endif
-
+                @endif    
+                <!-- Usuario AUTENTICADO - Nutriologo -->
+                @if(Auth::user()->id_rol == 2)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
+                    
+                    @if(Route::has('control'))
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👥 Ver dietas
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('logout'))
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            🚪 Cerrar sesión
+                        </a>
+                    @endif
+                @endif
+                <!-- Usuario AUTENTICADO - Administrador -->
+                @if(Auth::user()->id_rol == 3)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Entrenador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
+                    
+                    @if(Route::has('control'))
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👥 Ver clientes
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('cuenta'))
+                        <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👤 Ver cuenta
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('logout'))
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            🚪 Cerrar sesión
+                        </a>
+                    @endif
+                @endif
+                <!-- Usuario autenticado - Usuario -->
+                @if(Auth::user()->id_rol == 4)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Usuario, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
+                    
+                    @if(Route::has('control'))
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👥 Ver clientes
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('cuenta'))
+                        <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👤 Ver cuenta
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('logout'))
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            🚪 Cerrar sesión
+                        </a>
+                    @endif
+                @endif 
                 @else
                     <!-- Usuario NO autenticado -->
                     @if(Route::has('registrar_usuario'))
@@ -74,29 +141,95 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg">
             <div class="px-4 pt-2 pb-4 space-y-2">
                 @auth
-                    <!-- Usuario AUTENTICADO - Móvil -->
-                    <div class="px-4 py-2 text-sm font-medium text-gray-700 border-b border-gray-100">
-                        👋 Hola, {{ Auth::user()->nombre }}
-                    </div>
+                                @if(Auth::user()->id_rol == 1)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Administrador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
                     
                     @if(Route::has('control'))
-                        <a href="{{ route('control') }}" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             👥 Ver clientes
                         </a>
                     @endif
                     
                     @if(Route::has('cuenta'))
-                        <a href="{{ route('cuenta') }}" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                        <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             👤 Ver cuenta
                         </a>
                     @endif
                     
                     @if(Route::has('logout'))
-                        <a href="{{ route('logout') }}" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             🚪 Cerrar sesión
                         </a>
                     @endif
-
+                @endif    
+                <!-- Usuario AUTENTICADO - Nutriologo -->
+                @if(Auth::user()->id_rol == 2)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
+                    
+                    @if(Route::has('control'))
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👥 Ver dietas
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('logout'))
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            🚪 Cerrar sesión
+                        </a>
+                    @endif
+                @endif
+                <!-- Usuario AUTENTICADO - Administrador -->
+                @if(Auth::user()->id_rol == 3)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Entrenador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
+                    
+                    @if(Route::has('control'))
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👥 Ver clientes
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('cuenta'))
+                        <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👤 Ver cuenta
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('logout'))
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            🚪 Cerrar sesión
+                        </a>
+                    @endif
+                @endif
+                <!-- Usuario autenticado - Usuario -->
+                @if(Auth::user()->id_rol == 4)
+                    <span class="px-4 py-2 text-sm font-medium text-gray-700">
+                        👋 Hola Usuario, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                    </span>
+                    
+                    @if(Route::has('control'))
+                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👥 Ver clientes
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('cuenta'))
+                        <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            👤 Ver cuenta
+                        </a>
+                    @endif
+                    
+                    @if(Route::has('logout'))
+                        <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            🚪 Cerrar sesión
+                        </a>
+                    @endif
+                @endif 
                 @else
                     <!-- Usuario NO autenticado - Móvil -->
                     @if(Route::has('registrar_usuario'))
