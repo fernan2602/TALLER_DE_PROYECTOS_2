@@ -5,13 +5,32 @@
             <!-- Logo -->
             <div class="flex items-center space-x-3">
                 @auth
-                <a href="{{ Route::has('dashboard') ? route('dashboard') : url('/') }}" class="flex items-center space-x-3">
+                @if(Auth::user()->id_rol == 1)
+                <a href="{{ Route::has('admin') ? route('admin') : url('/') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
                     <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
                 </a>
+                @endif
+                @if(Auth::user()->id_rol== 2)
+                <a href="{{ Route::has('nutriologo') ? route('nutriologo') : url('/') }}" class="flex items-center space-x-3">
+                    <x-application-logo class="h-8 w-auto text-indigo-600" />
+                    <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
+                </a>
+                @endif
+                @if(Auth::user()->id_rol== 3)
+                <a href="{{ Route::has('entrenador') ? route('entrenador') : url('/') }}" class="flex items-center space-x-3">
+                    <x-application-logo class="h-8 w-auto text-indigo-600" />
+                    <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
+                </a>
+                @endif
+                @if(Auth::user()->id_rol== 4)
+                <a href="{{ Route::has('usuario') ? route('usuario') : url('/') }}" class="flex items-center space-x-3">
+                    <x-application-logo class="h-8 w-auto text-indigo-600" />
+                    <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
+                </a>
+                @endif
                 @else
-                
-                <a href="{{ Route::has('user') ? route('user') : url('/') }}" class="flex items-center space-x-3">
+                <a href="{{ Route::has('dashboard') ? route('dashboard') : url('/') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
                     <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
                 </a>
