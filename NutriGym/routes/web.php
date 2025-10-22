@@ -5,6 +5,8 @@ use App\Http\Controllers\RegistroUsuarioController;
 use App\Http\Controllers\LoginUsuarioController;
 use App\Http\Controllers\PreferenciaController;
 use App\Http\Controllers\MedidaController;
+use App\Http\Controllers\ObjetivoController;
+use App\Models\Usuario;
 use Illuminate\Auth\Events\Logout;
 
 // Redirigir la raíz al login
@@ -50,7 +52,20 @@ Route::get('control', function() {
 })->name('control');
 
 // Mi cuenta
-Route::get('cuenta', [PreferenciaController::class, 'index'])->name('cuenta');
+Route::get('cuenta', function()
+{
+    return view('usuario.cuenta');
+})->name('cuenta');
+//
+
+
+// Preferencia
+Route::get('preferencia', [ObjetivoController::class, 'select'])->name('preferencia');
+
+// Ruta para guardar objetivo (formulario)
+Route::post('/guardar-objetivo', [ObjetivoController::class, 'guardarObjetivo'])->name('guardar.objetivo');
+// Ruta para guardar preferencia
+Route::post('/guardar-preferencia',[PreferenciaController::class, 'guardarPreferencia'])->name('guardar.preferencia');
 
 // Registros medidas
 Route::post('/medidas', [MedidaController::class, 'store'])->name('medidas.store');
@@ -80,6 +95,4 @@ Route::get('/login', function () {
 
 Route::post('/login', [LoginUsuarioController::class, 'validacion'])
     ->name('login.store');
-
-
-    ?>
+?>

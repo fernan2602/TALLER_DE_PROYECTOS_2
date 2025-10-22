@@ -112,6 +112,12 @@
                         👋 Hola Usuario, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
                     
+                    @if(Route::has('preferencia'))
+                        <a href="{{ route('preferencia') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rsounded-lg transition">
+                            👥 Seleccionar preferencia
+                        </a>
+                    @endif
+                    
                     @if(Route::has('control'))
                         <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             👥 Ver clientes
