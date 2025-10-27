@@ -43,21 +43,9 @@
                 <!-- Usuario AUTENTICADO - Administrador -->
                 @if(Auth::user()->id_rol == 1)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
-                        👋 Hola Administrador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
+                        👋 Hola Administrador: {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
-                    
-                    @if(Route::has('control'))
-                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                            👥 Ver clientes
-                        </a>
-                    @endif
-                    
-                    @if(Route::has('cuenta'))
-                        <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                            👤 Ver cuenta
-                        </a>
-                    @endif
-                    
+    
                     @if(Route::has('logout'))
                         <a href="{{ route('logout') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             🚪 Cerrar sesión

@@ -6,6 +6,9 @@ use App\Http\Controllers\LoginUsuarioController;
 use App\Http\Controllers\PreferenciaController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\ObjetivoController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BackUpController;
+
 use App\Models\Usuario;
 use Illuminate\Auth\Events\Logout;
 
@@ -19,12 +22,14 @@ Route::get('/registrar_usuario', function () {
     return view('usuario.registrar_usuario');
 })->name('registrar_usuario');
 
+
+Route::post('/registrar_usuario', [RegistroUsuarioController::class, 'store'])
+    ->name('registrar_usuario.store');
+
 // Update de registro de medidas
 Route::put('/medidas/{id}',[MedidaController::class, 'update'])->name('medidas.update');
 
 
-Route::post('/registrar_usuario', [RegistroUsuarioController::class, 'store'])
-    ->name('registrar_usuario.store');
     
 // Dashboard
 
@@ -76,9 +81,6 @@ Route::get('usuario', function() {
     return view('ui_dashboard.usuario'); // vista de usuario --> autenticado
 })->name('usuario');
 
-Route::get('admin', function() {
-    return view('ui_dashboard.admin'); // vista de admin --> autenticado
-})->name('admin');
 
 Route::get('nutriologo', function() {
     return view('ui_dashboard.nutriologo'); // vista de nutriologo --> autenticado
@@ -95,4 +97,19 @@ Route::get('/login', function () {
 
 Route::post('/login', [LoginUsuarioController::class, 'validacion'])
     ->name('login.store');
+
+
+    
+Route::get('admin', function() {
+    return view('ui_dashboard.admin'); // vista de admin --> autenticado
+})->name('admin');
+
+// En routes
+Route::get('admin', [AdminController::class, 'index'])->name('admin');
+
+// Ruta : BackUp
+Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
+
+
 ?>
+

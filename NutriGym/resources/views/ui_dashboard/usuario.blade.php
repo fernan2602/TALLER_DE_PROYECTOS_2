@@ -5,5 +5,6 @@
                         👋 Hola, {{ Auth::user()->nombre }}
                                 {{Auth::user()->id}}
                                 {{Auth::user()->id_rol}}
-                    </span>
+                </span>
+                    
 @endsection

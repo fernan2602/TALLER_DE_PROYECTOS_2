@@ -28,9 +28,24 @@ class LoginUsuarioController extends Controller
         if ($usuario && Hash::check($credenciales['contrasena'], $usuario->contrasena))
         {
             Auth::login($usuario);
-            
             // Redirigir y enviar mensaje de ingreso 
-            return redirect()->intended('usuario')->with('succes','Bienvenido'.$usuario->nombre);
+            if($usuario->id_rol == 1)
+            {
+                return redirect()->intended('admin')->with('succes','Bienvenido'.$usuario->nombre);
+
+            }
+            if($usuario->id_rol == 2)
+            {
+                return redirect()->intended('nutriologo')->with('succes','Bienvenido'.$usuario->nombre);
+            }
+            if($usuario->id_rol == 3)
+            {
+                return redirect()->intended('entrenador')->with('succes','Bienvenido'.$usuario->nombre);
+            }
+            if($usuario->id_rol == 4)
+            {
+                return redirect()->intended('usuario')->with('succes','Bienvenido'.$usuario->nombre);   
+            }
         }
         // Si falla
         return back()->withErrors([

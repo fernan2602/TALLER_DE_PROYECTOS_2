@@ -41,20 +41,20 @@
             <div class="hidden md:flex items-center space-x-1">
                 @auth
                 <!-- Usuario AUTENTICADO - Administrador -->
-                @if(Auth::user()->id_rol == 1)
+                @if(Auth::user()->id_rol == 2)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
                         👋 Hola Administrador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
                     
                     @if(Route::has('control'))
                         <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                            👥 Ver clientes
+                            👥 Ver trabajadores
                         </a>
                     @endif
                     
                     @if(Route::has('cuenta'))
                         <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                            👤 Ver cuenta
+                            👤 Ver Trabajadores
                         </a>
                     @endif
 
@@ -66,7 +66,7 @@
                     @endif
                 @endif    
                 <!-- Usuario AUTENTICADO - Nutriologo -->
-                @if(Auth::user()->id_rol == 2)
+                @if(Auth::user()->id_rol == 5)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
                         👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
