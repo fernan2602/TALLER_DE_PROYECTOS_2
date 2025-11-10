@@ -4,92 +4,106 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class PreferenciaController extends Controller
 {
-    public function seleccionarObjetivo(Request $request)
+    /**
+     * Asignar preferencia a un usuario
+     */
+    public function guardar_preferencia($usuarioId, $preferenciaId)
     {
         try {
-            $request->validate([
-                'objetivo_id' => 'required|integer'
-            ]);
-
-            $usuarioId = Auth::id();
-
-            // Verificar si ya tiene un objetivo seleccionado
-            $objetivoExistente = DB::table('asignacionPreferencia')
+            // Verificar si ya existe la asignación
+            $asignacionExistente = DB::table('asignacion_preferencia')
                 ->where('id_usuario', $usuarioId)
+                ->where('id_preferencia', $preferenciaId)
                 ->first();
 
-            if ($objetivoExistente) {
-                // Actualizar objetivo existente
-                DB::table('asignacionPreferencia')
-                    ->where('id_usuario', $usuarioId)
-                    ->update([
-                        'id_objetivo' => $request->objetivo_id,
-                        'updated_at' => now()
-                    ]);
-            } else {
-                // Insertar nuevo objetivo
-                DB::table('asignacionPreferencia')->insert([
-                    'id_usuario' => $usuarioId,
-                    'id_objetivo' => $request->objetivo_id,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
+            if ($asignacionExistente) {
+                return [
+                    'success' => false,
+                    'message' => 'La preferencia ya está asignada a este usuario'
+                ];
             }
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Objetivo seleccionado correctamente'
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error al seleccionar el objetivo: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
-    public function guardarPreferencia(Request $request)
-    {
-        // Validar el preferencia_id
-        $request->validate([
-            'preferencia_id' => 'required|integer|exists:preferencias,id'
-        ]);
-
-        $usuarioId = Auth::id();
-
-        // Verificar si ya existe una asignación
-        $asignacionExistente = DB::table('asignacion_preferencia')
-            ->where('id_usuario', $usuarioId)
-            ->first();
-
-        if ($asignacionExistente) {
-            // Actualizar preferencia existente
-            DB::table('asignacion_preferencia')
-                ->where('id_usuario', $usuarioId)
-                ->update([
-                    'id_preferencia' => $request->preferencia_id,
-                    'updated_at' => now(),
-                    'fecha' => now()
-                ]);
-        } else {
-            // Insertar nueva asignación
-            DB::table('asignacion_preferencia')->insert([
+            // Crear nueva asignación
+            $asignacionId = DB::table('asignacion_preferencia')->insertGetId([
                 'id_usuario' => $usuarioId,
-                'id_preferencia' => $request->preferencia_id,
-                'fecha' => now(),
+                'id_preferencia' => $preferenciaId,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
-        }
 
-        // Redirigir con mensaje de éxito
-        return redirect()->route('preferencia')->with('success', 'preferencia seleccionado correctamente');
+            // Obtener nombre de la preferencia para el mensaje
+            $preferencia = DB::table('preferencias')->find($preferenciaId);
+
+            return [
+                'success' => true,
+                'message' => "Preferencia '{$preferencia->descripcion}' asignada correctamente",
+                'asignacion_id' => $asignacionId
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error asignando preferencia: ' . $e->getMessage()
+            ];
+        }
     }
 
+    /**
+     * Obtener preferencias de un usuario
+     */
+    public function obtener_preferencias_usuario($usuarioId)
+    {
+        try {
+            $preferencias = DB::table('asignacion_preferencia')
+                ->join('preferencias', 'asignacion_preferencia.id_preferencia', '=', 'preferencias.id')
+                ->where('asignacion_preferencia.id_usuario', $usuarioId)
+                ->select('preferencias.*')
+                ->get();
 
+            return [
+                'success' => true,
+                'preferencias' => $preferencias,
+                'total' => $preferencias->count()
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error obteniendo preferencias: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Eliminar preferencia de un usuario
+     */
+    public function eliminar_preferencia($asignacionId)
+    {
+        try {
+            $eliminado = DB::table('asignacion_preferencia')
+                ->where('id_asignacion', $asignacionId)
+                ->delete();
+
+            if ($eliminado) {
+                return [
+                    'success' => true,
+                    'message' => 'Preferencia eliminada correctamente'
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'No se encontró la asignación de preferencia'
+                ];
+            }
+
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error eliminando preferencia: ' . $e->getMessage()
+            ];
+        }
+    }
 }

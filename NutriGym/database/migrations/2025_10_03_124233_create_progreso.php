@@ -24,6 +24,7 @@ return new class extends Migration
         $table->decimal('masa_magra', 5,2)->nullable();
         $table->decimal('masa_muscular', 5,2)->nullable();
         $table->decimal('porcentaje_musculo', 5,2)->nullable();
+        $table->integer('progreso');
         $table->timestamps();
     });
 

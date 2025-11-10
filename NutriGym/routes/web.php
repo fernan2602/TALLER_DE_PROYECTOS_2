@@ -7,8 +7,10 @@ use App\Http\Controllers\PreferenciaController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\ObjetivoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlimentosController;
 use App\Http\Controllers\BackUpController;
-
+use App\Http\Controllers\NutriologoController;
+use App\Http\Controllers\MenuController;
 use App\Models\Usuario;
 use Illuminate\Auth\Events\Logout;
 
@@ -36,6 +38,7 @@ Route::put('/medidas/{id}',[MedidaController::class, 'update'])->name('medidas.u
 Route::get('/dashboard', function() {
     return view('dashboard'); // 
 })->name('dashboard');
+
 
 // Logout
 Route::get('logout',function(){
@@ -86,6 +89,16 @@ Route::get('nutriologo', function() {
     return view('ui_dashboard.nutriologo'); // vista de nutriologo --> autenticado
 })->name('nutriologo');
 
+Route::get('alimentos', function(){
+    return view('nutriologo.alimentos');
+})->name('alimentos');
+
+// Ruta para obtener alimentos 
+Route::get('alimentos', [AlimentosController::class, 'index'])->name('nutriologo.alimentos');
+
+// Update alimentos 
+Route::put('alimentos/{id}', [AlimentosController::class, 'update'])->name('nutriologo.alimentos.update');
+
 Route::get('entrenador', function() {
     return view('ui_dashboard.entrenador'); // vista de entrenador --> autenticado
 })->name('entrenador');
@@ -104,12 +117,30 @@ Route::get('admin', function() {
     return view('ui_dashboard.admin'); // vista de admin --> autenticado
 })->name('admin');
 
-// En routes
+// Para admin
 Route::get('admin', [AdminController::class, 'index'])->name('admin');
 
+// Para nutriologo
+Route::get('nutriologo', [NutriologoController::class, 'index'])->name('ui_dashboard.nutriologo');
+// Ruta objetivos validar   
+Route::get('/usuarios/{id}/objetivos', [NutriologoController::class, 'obtenerObjetivosUsuario'])->name('usuarios.objetivos');
+// Ruta preferencias validar
+Route::get('/usuarios/{id}/preferencias', [NutriologoController::class, 'obtenerPreferenciasUsuario'])->name('usuarios.preferencias');
+// GET
+Route::get('/menu/calcular-get/{usuarioId}', [MenuController::class, 'calcularGET']);
 // Ruta : BackUp
 Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
 
+
+
+// Prueba gemini    
+Route::get('/dashboard/prueba-gemini', [MenuController::class, 'pruebaGemini']);
+Route::get('/dashboard/debug-gemini', [MenuController::class, 'debugGeminiConfig']); 
+Route::get('/dashboard/prueba-gemini-usuario/{usuarioId}', [MenuController::class, 'pruebaGeminiUsuario']);
+Route::get('/dashboard/buscar-preferencia/{usuarioId}', [MenuController::class, 'buscarPreferencia']);
+
+
+// En routes/web.php
 
 ?>
 

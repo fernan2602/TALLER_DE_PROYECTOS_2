@@ -70,6 +70,20 @@ class Medida extends Model
         return $this->belongsTo(Usuario::class, 'id_usuario');
     }
 
+    /**
+     * Relación con el modelo Progreso (NUEVA RELACIÓN)
+     * Una medida puede tener muchos registros de progreso
+     */
+    public function progresos()
+    {
+        return $this->hasMany(Progreso::class, 'id_medida');
+    }
 
-
+    /**
+     * Obtener el progreso más reciente (NUEVA RELACIÓN)
+     */
+    public function progresoReciente()
+    {
+        return $this->hasOne(Progreso::class, 'id_medida')->latestOfMany();
+    }
 }

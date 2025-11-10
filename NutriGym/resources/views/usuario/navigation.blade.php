@@ -14,7 +14,7 @@
                 @if(Auth::user()->id_rol== 2)
                 <a href="{{ Route::has('nutriologo') ? route('nutriologo') : url('/') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
-                    <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
+                    <span class="hidden sm:block text-lg font-semibold text-gray-800">Nutrm</span>
                 </a>
                 @endif
                 @if(Auth::user()->id_rol== 3)
@@ -41,7 +41,7 @@
             <div class="hidden md:flex items-center space-x-1">
                 @auth
                 <!-- Usuario AUTENTICADO - Administrador -->
-                @if(Auth::user()->id_rol == 2)
+                @if(Auth::user()->id_rol == 1)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
                         👋 Hola Administrador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
@@ -66,7 +66,7 @@
                     @endif
                 @endif    
                 <!-- Usuario AUTENTICADO - Nutriologo -->
-                @if(Auth::user()->id_rol == 5)
+                @if(Auth::user()->id_rol == 2)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
                         👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>

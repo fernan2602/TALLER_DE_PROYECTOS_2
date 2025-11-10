@@ -69,30 +69,29 @@
                             <div class="space-y-4">
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                        <div class="block text-sm font-medium text-gray-700 mb-1">Nombre</div>
                                         <p class="input-neu bg-gray-50">{{ Auth::user()->nombre }}</p>
                                     </div>
-                                    
                                 </div>
                                 
                                 <div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                        <p class="input-neu bg-gray-50">{{Auth::user()->email}}</p>
+                                        <div class="block text-sm font-medium text-gray-700 mb-1">Email</div>
+                                        <p class="input-neu bg-gray-50">{{ Auth::user()->email }}</p>
                                     </div>
                                 </div>
                                 
                                 <div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</label>
-                                        <p class="input-neu bg-gray-50">{{Auth::user()->fecha_nacimiento}}</p>
+                                        <div class="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</div>
+                                        <p class="input-neu bg-gray-50">{{ Auth::user()->fecha_nacimiento }}</p>
                                     </div>
                                 </div>
 
                                 <div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de registro</label>
-                                        <p class="input-neu bg-gray-50">{{Auth::user()->fecha_registro}}</p>
+                                        <div class="block text-sm font-medium text-gray-700 mb-1">Fecha de registro</div>
+                                        <p class="input-neu bg-gray-50">{{ Auth::user()->fecha_registro }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -143,33 +142,32 @@
                                         <!-- Información Básica -->
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Peso (kg) *</label>
-                                                <input type="number" name="peso" step="0.01" class="input-neu" 
+                                                <label for="peso" class="block text-sm font-medium text-gray-700 mb-1">Peso (kg) *</label>
+                                                <input type="number" id="peso" name="peso" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->peso }}" required>
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Talla (cm) *</label>
-                                                <input type="number" name="talla" step="0.01" class="input-neu" 
+                                                <label for="talla" class="block text-sm font-medium text-gray-700 mb-1">Talla (cm) *</label>
+                                                <input type="number" id="talla" name="talla" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->talla }}" required>
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Edad *</label>
-                                                <input type="number" name="edad" class="input-neu" 
+                                                <label for="edad" class="block text-sm font-medium text-gray-700 mb-1">Edad *</label>
+                                                <input type="number" id="edad" name="edad" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->edad }}" required>
                                             </div>
                                         </div>
 
-
                                         <!-- Circunferencias - Fila 1 -->
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Brazo (cm)</label>
-                                                <input type="number" name="circunferencia_brazo" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_brazo" class="block text-sm font-medium text-gray-700 mb-1">Brazo (cm)</label>
+                                                <input type="number" id="circunferencia_brazo" name="circunferencia_brazo" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_brazo }}" placeholder="32.5">
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Antebrazo (cm)</label>
-                                                <input type="number" name="circunferencia_antebrazo" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_antebrazo" class="block text-sm font-medium text-gray-700 mb-1">Antebrazo (cm)</label>
+                                                <input type="number" id="circunferencia_antebrazo" name="circunferencia_antebrazo" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_antebrazo }}" placeholder="28.0">
                                             </div>
                                         </div>
@@ -177,13 +175,13 @@
                                         <!-- Circunferencias - Fila 2 -->
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Cintura (cm)</label>
-                                                <input type="number" name="circunferencia_cintura" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_cintura" class="block text-sm font-medium text-gray-700 mb-1">Cintura (cm)</label>
+                                                <input type="number" id="circunferencia_cintura" name="circunferencia_cintura" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_cintura }}" placeholder="85.0">
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Caderas (cm)</label>
-                                                <input type="number" name="circunferencia_caderas" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_caderas" class="block text-sm font-medium text-gray-700 mb-1">Caderas (cm)</label>
+                                                <input type="number" id="circunferencia_caderas" name="circunferencia_caderas" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_caderas }}" placeholder="95.0">
                                             </div>
                                         </div>
@@ -191,13 +189,13 @@
                                         <!-- Circunferencias - Fila 3 -->
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Muslos (cm)</label>
-                                                <input type="number" name="circunferencia_muslos" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_muslos" class="block text-sm font-medium text-gray-700 mb-1">Muslos (cm)</label>
+                                                <input type="number" id="circunferencia_muslos" name="circunferencia_muslos" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_muslos }}" placeholder="55.0">
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Pantorrilla (cm)</label>
-                                                <input type="number" name="circunferencia_pantorrilla" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_pantorrilla" class="block text-sm font-medium text-gray-700 mb-1">Pantorrilla (cm)</label>
+                                                <input type="number" id="circunferencia_pantorrilla" name="circunferencia_pantorrilla" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_pantorrilla }}" placeholder="38.0">
                                             </div>
                                         </div>
@@ -205,11 +203,10 @@
                                         <!-- Circunferencias - Última -->
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Cuello (cm)</label>
-                                                <input type="number" name="circunferencia_cuello" step="0.01" class="input-neu" 
+                                                <label for="circunferencia_cuello" class="block text-sm font-medium text-gray-700 mb-1">Cuello (cm)</label>
+                                                <input type="number" id="circunferencia_cuello" name="circunferencia_cuello" step="0.01" class="input-neu" 
                                                     value="{{ auth()->user()->ultimaMedida()->circunferencia_cuello }}" placeholder="38.5">
                                             </div>
-
                                         </div>
 
                                         <!-- Información adicional -->
@@ -489,11 +486,12 @@
                                     </svg>
                                     Cancelar
                                 </button>
-                                <button type="button" onclick="submitForm()" class="btn-neu flex-1"> 
+                                <button type="button" onclick="confirmarUpdate()" class="btn-neu flex-1"> 
+                                    <!-- CAMBIO: onclick="confirmarUpdate()" -->
                                     <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                     </svg>
-                                    Sí, Guardar
+                                    Sí, Actualizar
                                 </button>
                             </div>
                         </div>
@@ -525,11 +523,12 @@
                                         </svg>
                                         Cancelar
                                     </button>
-                                    <button type="button" onclick="submitForm()" class="btn-neu flex-1"> 
+                                     <button type="button" onclick="confirmarStore()" class="btn-neu flex-1">
+                                        <!-- CAMBIO: onclick="confirmarStore()" -->
                                         <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                         </svg>
-                                        Sí, Guardar
+                                        Sí, Registrar
                                     </button>
                                 </div>
                         </div>
@@ -612,14 +611,81 @@
     }
 
     // Función única para enviar formularios (elimina el duplicado)
-    function submitForm() {
+// FUNCIONES NUEVAS PARA MANEJAR CONFIRMACIÓN ESPECÍFICA
+function confirmarUpdate() {
+    console.log('=== CONFIRMANDO ACTUALIZACIÓN ===');
+    const form = document.getElementById('registroForm');
+    
+    if (!form) {
+        console.error('Error: No se encontró el formulario');
+        return;
+    }
+    
+    // Cerrar modal de confirmación
+    closeConfirmacionModal();
+    
+    // Mostrar loading state
+    const confirmBtn = document.querySelector('#confirmacionModal button[onclick*="confirmarUpdate"]');
+    if (confirmBtn) {
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Procesando...';
+    }
+    
+    // DEBUG: Mostrar información del formulario
+    console.log('Form action:', form.action);
+    console.log('Form method:', form.method);
+    
+    // Enviar formulario
+    form.submit();
+}
+
+    function confirmarStore() {
+        console.log('=== CONFIRMANDO NUEVO REGISTRO ===');
+        const form = document.getElementById('registroForm');
+        
+        if (!form) {
+            console.error('Error: No se encontró el formulario');
+            return;
+        }
+        
+        // Cerrar modal de confirmación
+        closeConfirmacionModal();
+        
+        // Mostrar loading state
+        const confirmBtn = document.querySelector('#confirmacionModal button[onclick*="confirmarStore"]');
+        if (confirmBtn) {
+            confirmBtn.disabled = true;
+            confirmBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Guardando...';
+        }
+        
+        // DEBUG: Mostrar información del formulario
+        console.log('Form action:', form.action);
+        console.log('Form method:', form.method);
+        
+        // Enviar formulario
+        form.submit();
+    }
+
+    // FUNCIÓN PARA DEBUG (puedes eliminar después de probar)
+    function debugFormInfo() {
         const form = document.getElementById('registroForm');
         if (form) {
-            form.submit();
-        } else {
-            console.error('No se encontró el formulario registroForm');
+            console.log('=== DEBUG FORMULARIO ===');
+            console.log('Action:', form.action);
+            console.log('Method:', form.method);
+            console.log('CSRF:', form.querySelector('input[name="_token"]')?.value);
+            console.log('Method Spoofing:', form.querySelector('input[name="_method"]')?.value);
         }
     }
+
+    // Llama a debug cuando se abra cualquier modal
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalButtons = document.querySelectorAll('[onclick*="openModal"]');
+        modalButtons.forEach(button => {
+            const originalOnClick = button.getAttribute('onclick');
+            button.setAttribute('onclick', originalOnClick + '; debugFormInfo();');
+        });
+    });
 
 </script>
 

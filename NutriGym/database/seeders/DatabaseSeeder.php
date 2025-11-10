@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AsignacionPreferencia;
 use App\Models\User;
 use Database\Factories\PromedioFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,7 +21,12 @@ class DatabaseSeeder extends Seeder
             PreferenciasSeeder::class,
             ObjetivosSeeder::class,
             UsuarioSeeder::class,
-            MedidaSeeder::class
+            MedidaSeeder::class,
+            RolesSeeder::class,
+            AsignacionPreferenciaSeeder::class,
+            AsignacionObjetivoSeeder::class,
+            AlimentosSeeder::class
+
         ]);
     }
 }

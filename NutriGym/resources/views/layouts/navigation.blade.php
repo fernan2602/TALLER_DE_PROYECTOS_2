@@ -12,9 +12,9 @@
                 </a>
                 @endif
                 @if(Auth::user()->id_rol== 2)
-                <a href="{{ Route::has('nutriologo') ? route('nutriologo') : url('/') }}" class="flex items-center space-x-3">
+                <a href="{{url('/nutriologo') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
-                    <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
+                    <span class="hidden sm:block text-lg font-semibold text-gray-800">Nutrigym</span>
                 </a>
                 @endif
                 @if(Auth::user()->id_rol== 3)
@@ -30,7 +30,7 @@
                 </a>
                 @endif
                 @else
-                <a href="{{ Route::has('dashboard') ? route('dashboard') : url('/') }}" class="flex items-center space-x-3">
+                <a href="{{ Route::has('login') ? route('login') : url('/') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
                     <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
                 </a>
@@ -58,9 +58,9 @@
                         👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
                     
-                    @if(Route::has('control'))
-                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                            👥 Ver dietas
+                    @if(Route::has('alimentos'))
+                        <a href="{{ route('alimentos') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                            Ver Alimentos
                         </a>
                     @endif
                     
@@ -154,7 +154,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg">
             <div class="px-4 pt-2 pb-4 space-y-2">
                 @auth
-                                @if(Auth::user()->id_rol == 1)
+                    @if(Auth::user()->id_rol == 1)
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
                         👋 Hola Administrador, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
