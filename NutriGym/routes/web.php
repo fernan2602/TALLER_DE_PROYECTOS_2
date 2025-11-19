@@ -13,10 +13,6 @@ use App\Http\Controllers\NutriologoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProgresoController;
 use App\Http\Controllers\EntrenadorController;
-<<<<<<< HEAD
-use App\Http\Controllers\UsuarioController;
-=======
->>>>>>> e9627e26c85753fc98847704ca35fd80a6a0edf1
 use App\Models\Usuario;
 use Illuminate\Auth\Events\Logout;
 
