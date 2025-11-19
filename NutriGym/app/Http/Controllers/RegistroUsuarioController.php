@@ -29,7 +29,7 @@ class RegistroUsuarioController extends Controller
             'fecha_nacimiento' => $request->fecha_nacimiento,
             'fecha_registro' => now(),
             'contrasena' => Hash::make($request->contrasena),
-            'id_rol' => 2,
+            'id_rol' => 4,
         ]);
 
         Auth::login($usuario);

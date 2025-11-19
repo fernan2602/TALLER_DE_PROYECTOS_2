@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Medida;
 
-class NutriologoController extends Controller
+
+class EntrenadorController extends Controller
 {
     //
     public function index()
@@ -20,7 +22,7 @@ class NutriologoController extends Controller
                 'roles.nombre_rol as nombre_rol'
             )
             ->get();
-        return view('ui_dashboard.nutriologo', compact('usuarios'));
+        return view('ui_dashboard.entrenador', compact('usuarios'));
     }
 
     public function obtenerObjetivosUsuario($usuarioId)
@@ -53,33 +55,50 @@ class NutriologoController extends Controller
         }
     }
 
-    public function obtenerPreferenciasUsuario($usuarioId)
+     public function obtenerMedidasUsuario($usuarioId)
     {
         try {
-            $preferencias = DB::table('asignacion_preferencia')
-                ->join('preferencias', 'asignacion_preferencia.id_preferencia', '=', 'preferencias.id')
-                ->where('asignacion_preferencia.id_usuario', $usuarioId)
-                ->select(
-                    'preferencias.id',
-                    'preferencias.tipo',
-                    'preferencias.descripcion',
-                    'asignacion_preferencia.created_at as fecha_asignacion'
-                )
+            $medidas = Medida::where('id_usuario', $usuarioId)
+                ->orderBy('fecha_registro', 'desc')
                 ->get();
 
             return response()->json([
                 'success' => true,
-                'preferencias' => $preferencias,
-                'total' => $preferencias->count()
+                'medidas' => $medidas,
+                'total' => $medidas->count()
             ]);
 
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error al obtener preferencias: ' . $e->getMessage()
+                'message' => 'Error al obtener medidas: ' . $e->getMessage()
             ], 500);
         }
     }
+
+    /**
+     * Obtener la última medida de un usuario
+     */
+    public function obtenerUltimaMedida($usuarioId)
+    {
+        try {
+            $medida = Medida::where('id_usuario', $usuarioId)
+                ->orderBy('fecha_registro', 'desc')
+                ->first();
+
+            return response()->json([
+                'success' => true,
+                'medida' => $medida
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener la medida: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
 
 
 }

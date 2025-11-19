@@ -12,6 +12,7 @@ use App\Http\Controllers\BackUpController;
 use App\Http\Controllers\NutriologoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProgresoController;
+use App\Http\Controllers\EntrenadorController;
 use App\Models\Usuario;
 use Illuminate\Auth\Events\Logout;
 
@@ -116,6 +117,21 @@ Route::get('entrenador', function() {
     return view('ui_dashboard.entrenador'); // vista de entrenador --> autenticado
 })->name('entrenador');
 
+// Vista entrenador clientes
+Route::get('entrenador', [EntrenadorController::class, 'index'])->name('ui_dashboard.entrenador');
+
+Route::get('/entrenador/medidas/{usuarioId}', [EntrenadorController::class, 'obtenerMedidasUsuario'])
+    ->name('entrenador.medidas.usuario');
+
+// Para obtener la última medida de un usuario
+Route::get('/entrenador/ultima-medida/{usuarioId}', [EntrenadorController::class, 'obtenerUltimaMedida'])
+    ->name('entrenador.ultima.medida');
+
+// En routes/web.php - parámetro realmente opcional
+Route::get('/progreso/datos/{pacienteId?}', [ProgresoController::class, 'obtenerProgresoUsuario'])
+    ->name('progreso.datos')
+    ->middleware('auth');
+
 // Login
 Route::get('/login', function () {
     return view('usuario.login');
@@ -149,7 +165,7 @@ Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('
 Route::get('/dashboard/prueba-gemini', [MenuController::class, 'pruebaGemini']);
 Route::get('/dashboard/debug-gemini', [MenuController::class, 'debugGeminiConfig']); 
 Route::get('/dashboard/prueba-gemini-usuario/{usuarioId}', [MenuController::class, 'pruebaGeminiUsuario']);
-Route::get('/dashboard/buscar-preferencia/{usuarioId}', [MenuController::class, 'buscarPreferencia']);
+Route::get('/dashboard/generar-dieta/{usuarioId}', [MenuController::class, 'generarDieta']);
 
 
 // En routes/web.php

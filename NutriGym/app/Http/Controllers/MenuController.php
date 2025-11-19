@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class MenuController extends Controller
 {
     //
@@ -26,7 +27,7 @@ class MenuController extends Controller
                 ];
             }
 
-            // GET = TMB × Factor de actividad (1.55 para actividad moderada)
+            // GET 
             $get = $progreso->tmb * 1.55;
 
             return [
@@ -57,7 +58,7 @@ class MenuController extends Controller
 
             return response()->json([
                 'success' => true,
-                'mensaje' => '✅ Gemini API funcionando correctamente',
+                'mensaje' => 'Gemini API funcionando correctamente',
                 'respuesta' => $respuesta
             ]);
             
@@ -70,7 +71,7 @@ class MenuController extends Controller
     }
 
     // Prueba de Gemini con datos de usuario
-    public function buscarPreferencia($usuarioId)
+    public function generarDieta($usuarioId)
     {
         try {
             // Obtener datos del usuario
@@ -86,7 +87,7 @@ class MenuController extends Controller
                 ], 404);
             }
 
-            // ✅ OBTENER ALIMENTOS CON ID Y CALORÍAS
+            // OBTENER ALIMENTOS CON ID Y CALORÍAS
             $alimentosCompletos = DB::table('alimentos')
                 ->select('id', 'nombre', 'calorias')
                 ->get();
@@ -97,126 +98,193 @@ class MenuController extends Controller
                 ->where('asignacion_preferencia.id_usuario', $usuarioId)
                 ->select('preferencias.descripcion')
                 ->get();
+
+            // OBTENER OBJETIVOS DEL USUARIO
+            $objetivos = DB::table('asignacion_objetivo')
+                ->join('objetivos', 'asignacion_objetivo.id_objetivo', '=', 'objetivos.id')
+                ->where('asignacion_objetivo.id_usuario', $usuarioId)
+                ->select('objetivos.descripcion')
+                ->get();
+
             $alimentosSeleccionados = $this->filtrarAlimentosConIA($alimentosCompletos, $preferencias, 9); // 9 para 3x3
         
-        // ✅ DIVIDIR ALIMENTOS POR COMIDAS
-        $alimentosPorComida = $this->dividirAlimentosPorComidas($alimentosSeleccionados);
-        
-        // ✅ CALCULAR CALORÍAS POR COMIDA Y TOTALES
-        $caloriasPorComida = $this->calcularCaloriasPorComida($alimentosPorComida);
-        $caloriasTotales = array_sum($caloriasPorComida);
+            // DIVIDIR ALIMENTOS POR COMIDAS
+            $alimentosPorComida = $this->dividirAlimentosPorComidas($alimentosSeleccionados);
+            
+            // CALCULAR CALORÍAS POR COMIDA Y TOTALES
+            $caloriasPorComida = $this->calcularCaloriasPorComida($alimentosPorComida);
+            $caloriasTotales = array_sum($caloriasPorComida);
 
-        // Generar menú con Gemini
+            // CALCULAR GET Y AJUSTAR SEGÚN OBJETIVOS
+            $resultadoGET = $this->calcularGET($usuarioId);
+            $getValor = $resultadoGET['success'] ? $resultadoGET['get'] : 0;
+            
+            // AJUSTAR CALORÍAS SEGÚN OBJETIVOS
+            $caloriasRecomendadas = $this->ajustarCaloriasPorObjetivo($getValor, $objetivos);
+            $diferenciaCalorias = $caloriasRecomendadas - $caloriasTotales;
+
+            // Generar menú con Gemini
+            $geminiService = new \App\Services\GeminiService();
+            
+            $prompt = "Genera un menú diario con este formato exacto:
+
+            Desayuno: [comida]
+            Almuerzo: [comida] 
+            Cena: [comida]
+
+            Usuario: {$usuario->nombre}";
+
+            if ($preferencias->isNotEmpty()) {
+                $prefText = $preferencias->pluck('descripcion')->implode(', ');
+                $prompt .= "\nPreferencias: {$prefText}";
+            }
+
+            // Incluir objetivos en el prompt
+            if ($objetivos->isNotEmpty()) {
+                $objText = $objetivos->pluck('descripcion')->implode(', ');
+                $prompt .= "\nObjetivos: {$objText}";
+                $prompt .= "\nCalorías objetivo: {$caloriasRecomendadas} kcal";
+            }
+
+            // Incluir alimentos organizados por comida en el prompt
+            if (!empty($alimentosPorComida)) {
+                $prompt .= "\n\nAlimentos organizados:";
+                $prompt .= "\nDesayuno: " . $alimentosPorComida['desayuno']->pluck('nombre')->implode(', ');
+                $prompt .= "\nAlmuerzo: " . $alimentosPorComida['almuerzo']->pluck('nombre')->implode(', ');
+                $prompt .= "\nCena: " . $alimentosPorComida['cena']->pluck('nombre')->implode(', ');
+            }
+
+            $prompt .= "\n\nResponde solo con el menú en el formato solicitado.";
+
+            $mensajeGemini = $geminiService->generateContent($prompt);
+            
+            return response()->json([
+                'mensaje_personalizado' => $mensajeGemini,
+                'alimentos_por_comida' => [
+                    'desayuno' => $alimentosPorComida['desayuno']->map(function($alimento) {
+                        return [
+                            'id' => $alimento->id,
+                            'nombre' => $alimento->nombre,
+                            'calorias' => $alimento->calorias
+                        ];
+                    }),
+                    'almuerzo' => $alimentosPorComida['almuerzo']->map(function($alimento) {
+                        return [
+                            'id' => $alimento->id,
+                            'nombre' => $alimento->nombre,
+                            'calorias' => $alimento->calorias
+                        ];
+                    }),
+                    'cena' => $alimentosPorComida['cena']->map(function($alimento) {
+                        return [
+                            'id' => $alimento->id,
+                            'nombre' => $alimento->nombre,
+                            'calorias' => $alimento->calorias
+                        ];
+                    })
+                ],
+                'calorias_por_comida' => $caloriasPorComida,
+                'calorias_totales' => $caloriasTotales,
+                'GET' => $getValor,
+                'objetivos_usuario' => $objetivos->pluck('descripcion'),
+                'calorias_recomendadas' => $caloriasRecomendadas,
+                'diferencia_calorias' => $diferenciaCalorias,
+                'estado_calorias' => $this->evaluarEstadoCalorias($diferenciaCalorias)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'mensaje' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // AJUSTAR CALORÍAS SEGÚN OBJETIVOS
+    private function ajustarCaloriasPorObjetivo($getBase, $objetivos)
+    {
+        $caloriasAjustadas = $getBase;
+        
+        foreach ($objetivos as $objetivo) {
+            $descripcion = strtolower($objetivo->descripcion);
+            
+            if (strpos($descripcion, 'bajar') !== false || strpos($descripcion, 'perder') !== false || strpos($descripcion, 'reducir') !== false) {
+                // Déficit calórico para bajar de peso (15-20% menos)
+                $caloriasAjustadas = $getBase * 0.80; // 20% menos
+            } elseif (strpos($descripcion, 'subir') !== false || strpos($descripcion, 'aumentar') !== false || strpos($descripcion, 'ganar') !== false) {
+                // Superávit calórico para subir de peso (10-15% más)
+                $caloriasAjustadas = $getBase * 1.15; // 15% más
+            } elseif (strpos($descripcion, 'mantener') !== false || strpos($descripcion, 'conservar') !== false) {
+                // Mantener peso (GET base)
+                $caloriasAjustadas = $getBase;
+            } elseif (strpos($descripcion, 'definir') !== false || strpos($descripcion, 'tonificar') !== false || strpos($descripcion,'desarrollar') !== false) {
+                // Déficit moderado para definición muscular
+                $caloriasAjustadas = $getBase * 0.85; // 15% menos
+            }
+        }
+        
+        return round($caloriasAjustadas);
+    }
+
+    // EVALUAR ESTADO DE CALORÍAS
+    private function evaluarEstadoCalorias($diferencia)
+    {
+        if ($diferencia > 200) {
+            return 'Por debajo del objetivo - considerar aumentar calorías';
+        } elseif ($diferencia < -200) {
+            return 'Por encima del objetivo - considerar reducir calorías';
+        } else {
+            return 'Dentro del rango objetivo';
+        }
+    }
+
+    // DIVIDIR ALIMENTOS POR COMIDAS
+    private function dividirAlimentosPorComidas($alimentosSeleccionados)
+    {
+        $alimentosArray = $alimentosSeleccionados->shuffle()->values();
+        $count = $alimentosArray->count();
+        
+        $porComida = floor($count / 3);
+        
+        return [
+            'desayuno' => $alimentosArray->slice(0, $porComida),
+            'almuerzo' => $alimentosArray->slice($porComida, $porComida),
+            'cena' => $alimentosArray->slice($porComida * 2)
+        ];
+    }
+
+    // CALCULAR CALORÍAS POR COMIDA
+    private function calcularCaloriasPorComida($alimentosPorComida)
+    {
+        return [
+            'desayuno' => $alimentosPorComida['desayuno']->sum('calorias'),
+            'almuerzo' => $alimentosPorComida['almuerzo']->sum('calorias'),
+            'cena' => $alimentosPorComida['cena']->sum('calorias')
+        ];
+    }
+
+    // FILTRADO INTELIGENTE CON IA (actualizado para trabajar con objetos completos)
+    private function filtrarAlimentosConIA($alimentos, $preferencias, $cantidad = 9)
+    {
         $geminiService = new \App\Services\GeminiService();
         
-        $prompt = "Genera un menú diario con este formato exacto:
+        $listaAlimentos = $alimentos->pluck('nombre')->implode(', ');
+        
+        $promptFiltrado = "Selecciona EXACTAMENTE {$cantidad} alimentos de esta lista que sean compatibles con: " . 
+                        ($preferencias->isNotEmpty() ? $preferencias->pluck('descripcion')->implode(', ') : 'Ninguna') . 
+                        "\n\nLista: {$listaAlimentos}\n\nRespuesta solo con nombres separados por coma:";
 
-        Desayuno: [comida]
-        Almuerzo: [comida] 
-        Cena: [comida]
-
-        Usuario: {$usuario->nombre}";
-
-        if ($preferencias->isNotEmpty()) {
-            $prefText = $preferencias->pluck('descripcion')->implode(', ');
-            $prompt .= "\nPreferencias: {$prefText}";
-        }
-
-        // Incluir alimentos organizados por comida en el prompt
-        if (!empty($alimentosPorComida)) {
-            $prompt .= "\n\nAlimentos organizados:";
-            $prompt .= "\nDesayuno: " . $alimentosPorComida['desayuno']->pluck('nombre')->implode(', ');
-            $prompt .= "\nAlmuerzo: " . $alimentosPorComida['almuerzo']->pluck('nombre')->implode(', ');
-            $prompt .= "\nCena: " . $alimentosPorComida['cena']->pluck('nombre')->implode(', ');
-        }
-
-        $prompt .= "\n\nResponde solo con el menú en el formato solicitado.";
-
-        $mensajeGemini = $geminiService->generateContent($prompt);
-
-        return response()->json([
-            'mensaje_personalizado' => $mensajeGemini,
-            'alimentos_por_comida' => [
-                'desayuno' => $alimentosPorComida['desayuno']->map(function($alimento) {
-                    return [
-                        'id' => $alimento->id,
-                        'nombre' => $alimento->nombre,
-                        'calorias' => $alimento->calorias
-                    ];
-                }),
-                'almuerzo' => $alimentosPorComida['almuerzo']->map(function($alimento) {
-                    return [
-                        'id' => $alimento->id,
-                        'nombre' => $alimento->nombre,
-                        'calorias' => $alimento->calorias
-                    ];
-                }),
-                'cena' => $alimentosPorComida['cena']->map(function($alimento) {
-                    return [
-                        'id' => $alimento->id,
-                        'nombre' => $alimento->nombre,
-                        'calorias' => $alimento->calorias
-                    ];
-                })
-            ],
-            'calorias_por_comida' => $caloriasPorComida,
-            'calorias_totales' => $caloriasTotales
-        ]);
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'mensaje' => 'Error: ' . $e->getMessage()
-        ], 500);
-    }
+        $respuestaIA = $geminiService->generateContent($promptFiltrado);
+        
+        // DEBUG: Ver qué respondió la IA
+        \Log::info("IA respondió: " . $respuestaIA);
+        \Log::info("Número de alimentos encontrados: " . $alimentos->count());
+        
+        return $this->procesarRespuestaFiltrado($respuestaIA, $alimentos, $cantidad);
     }
 
-    // ✅ DIVIDIR ALIMENTOS POR COMIDAS
-    private function dividirAlimentosPorComidas($alimentosSeleccionados)
-{
-    $alimentosArray = $alimentosSeleccionados->shuffle()->values();
-    $count = $alimentosArray->count();
-    
-    $porComida = floor($count / 3);
-    
-    return [
-        'desayuno' => $alimentosArray->slice(0, $porComida),
-        'almuerzo' => $alimentosArray->slice($porComida, $porComida),
-        'cena' => $alimentosArray->slice($porComida * 2)
-    ];
-}
 
-// ✅ CALCULAR CALORÍAS POR COMIDA
-private function calcularCaloriasPorComida($alimentosPorComida)
-{
-    return [
-        'desayuno' => $alimentosPorComida['desayuno']->sum('calorias'),
-        'almuerzo' => $alimentosPorComida['almuerzo']->sum('calorias'),
-        'cena' => $alimentosPorComida['cena']->sum('calorias')
-    ];
-}
-// ✅ FILTRADO INTELIGENTE CON IA (actualizado para trabajar con objetos completos)
-private function filtrarAlimentosConIA($alimentos, $preferencias, $cantidad = 9)
-{
-    $geminiService = new \App\Services\GeminiService();
-    
-    $listaAlimentos = $alimentos->pluck('nombre')->implode(', ');
-    
-    $promptFiltrado = "Selecciona EXACTAMENTE {$cantidad} alimentos de esta lista que sean compatibles con: " . 
-                     ($preferencias->isNotEmpty() ? $preferencias->pluck('descripcion')->implode(', ') : 'Ninguna') . 
-                     "\n\nLista: {$listaAlimentos}\n\nRespuesta solo con nombres separados por coma:";
-
-    $respuestaIA = $geminiService->generateContent($promptFiltrado);
-    
-    // DEBUG: Ver qué respondió la IA
-    \Log::info("IA respondió: " . $respuestaIA);
-    \Log::info("Número de alimentos encontrados: " . $alimentos->count());
-    
-    return $this->procesarRespuestaFiltrado($respuestaIA, $alimentos, $cantidad);
-}
-
-
-    // ✅ PROCESAR RESPUESTA DE IA (actualizado para mantener objetos completos)
+    // PROCESAR RESPUESTA DE IA (actualizado para mantener objetos completos)
     private function procesarRespuestaFiltrado($respuestaIA, $alimentos, $cantidad)
     {
         // Limpiar y dividir la respuesta
