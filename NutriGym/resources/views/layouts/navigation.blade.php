@@ -12,7 +12,7 @@
                 </a>
                 @endif
                 @if(Auth::user()->id_rol== 2)
-                <a href="{{url('/nutriologo') }}" class="flex items-center space-x-3">
+                <a href="{{url('nutriologo') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
                     <span class="hidden sm:block text-lg font-semibold text-gray-800">Nutrigym</span>
                 </a>
@@ -58,8 +58,8 @@
                         👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
                     
-                    @if(Route::has('alimentos'))
-                        <a href="{{ route('alimentos') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                    @if(Route::has('nutriologo.alimentos'))
+                        <a href="{{ route('nutriologo.alimentos') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             Ver Alimentos
                         </a>
                     @endif
@@ -183,8 +183,8 @@
                         👋 Hola Nutriologo, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
                     
-                    @if(Route::has('control'))
-                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
+                    @if(Route::has('alimentos'))
+                        <a href="{{ route('alimentos') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
                             👥 Ver dietas
                         </a>
                     @endif
