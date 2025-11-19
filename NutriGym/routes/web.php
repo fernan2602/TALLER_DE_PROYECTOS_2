@@ -11,6 +11,9 @@ use App\Http\Controllers\AlimentosController;
 use App\Http\Controllers\BackUpController;
 use App\Http\Controllers\NutriologoController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProgresoController;
+use App\Http\Controllers\EntrenadorController;
+use App\Http\Controllers\UsuarioController;
 use App\Models\Usuario;
 use Illuminate\Auth\Events\Logout;
 
@@ -28,8 +31,21 @@ Route::get('/registrar_usuario', function () {
 Route::post('/registrar_usuario', [RegistroUsuarioController::class, 'store'])
     ->name('registrar_usuario.store');
 
-// Update de registro de medidas
-Route::put('/medidas/{id}',[MedidaController::class, 'update'])->name('medidas.update');
+
+// Mi cuenta
+Route::get('/cuenta', function() {
+    return view('usuario.cuenta');
+})->name('cuenta');
+
+// Registros medidas 
+
+Route::get('/cuenta', [MedidaController::class, 'index'])->name('index');
+
+// Store
+Route::post('/medidas', [MedidaController::class, 'store'])->name('medidas.store');
+
+// Update
+Route::put('/medidas/{medida}', [MedidaController::class, 'update'])->name('medidas.update');
 
 
     
@@ -59,11 +75,7 @@ Route::get('control', function() {
     return view('admin.control'); // 
 })->name('control');
 
-// Mi cuenta
-Route::get('cuenta', function()
-{
-    return view('usuario.cuenta');
-})->name('cuenta');
+
 //
 
 
@@ -75,8 +87,7 @@ Route::post('/guardar-objetivo', [ObjetivoController::class, 'guardarObjetivo'])
 // Ruta para guardar preferencia
 Route::post('/guardar-preferencia',[PreferenciaController::class, 'guardarPreferencia'])->name('guardar.preferencia');
 
-// Registros medidas
-Route::post('/medidas', [MedidaController::class, 'store'])->name('medidas.store');
+
 
 
 // 
@@ -89,9 +100,15 @@ Route::get('nutriologo', function() {
     return view('ui_dashboard.nutriologo'); // vista de nutriologo --> autenticado
 })->name('nutriologo');
 
-Route::get('alimentos', function(){
-    return view('nutriologo.alimentos');
-})->name('alimentos');
+// Para nutriologo
+Route::get('nutriologo', [NutriologoController::class, 'index'])->name('ui_dashboard.nutriologo');
+
+// En routes/web.php - parámetro realmente opcional
+Route::get('/progreso/datos/{pacienteId?}', [ProgresoController::class, 'obtenerProgresoUsuario'])
+    ->name('progreso.datos')
+    ->middleware('auth');
+
+
 
 // Ruta para obtener alimentos 
 Route::get('alimentos', [AlimentosController::class, 'index'])->name('nutriologo.alimentos');
@@ -99,9 +116,30 @@ Route::get('alimentos', [AlimentosController::class, 'index'])->name('nutriologo
 // Update alimentos 
 Route::put('alimentos/{id}', [AlimentosController::class, 'update'])->name('nutriologo.alimentos.update');
 
+// Ruta para guardar nuevo alimento
+Route::post('alimentos', [AlimentosController::class, 'store'])->name('nutriologo.alimentos.store');
+// Ruta para eliminar alimentos
+Route::delete('alimentos/{id}', [AlimentosController::class, 'destroy'])->name('nutriologo.alimentos.destroy');
+
+
 Route::get('entrenador', function() {
     return view('ui_dashboard.entrenador'); // vista de entrenador --> autenticado
 })->name('entrenador');
+
+// Vista entrenador clientes
+Route::get('entrenador', [EntrenadorController::class, 'index'])->name('ui_dashboard.entrenador');
+
+Route::get('/entrenador/medidas/{usuarioId}', [EntrenadorController::class, 'obtenerMedidasUsuario'])
+    ->name('entrenador.medidas.usuario');
+
+// Para obtener la última medida de un usuario
+Route::get('/entrenador/ultima-medida/{usuarioId}', [EntrenadorController::class, 'obtenerUltimaMedida'])
+    ->name('entrenador.ultima.medida');
+
+// En routes/web.php - parámetro realmente opcional
+Route::get('/progreso/datos/{pacienteId?}', [ProgresoController::class, 'obtenerProgresoUsuario'])
+    ->name('progreso.datos')
+    ->middleware('auth');
 
 // Login
 Route::get('/login', function () {
@@ -120,8 +158,7 @@ Route::get('admin', function() {
 // Para admin
 Route::get('admin', [AdminController::class, 'index'])->name('admin');
 
-// Para nutriologo
-Route::get('nutriologo', [NutriologoController::class, 'index'])->name('ui_dashboard.nutriologo');
+
 // Ruta objetivos validar   
 Route::get('/usuarios/{id}/objetivos', [NutriologoController::class, 'obtenerObjetivosUsuario'])->name('usuarios.objetivos');
 // Ruta preferencias validar
@@ -137,7 +174,7 @@ Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('
 Route::get('/dashboard/prueba-gemini', [MenuController::class, 'pruebaGemini']);
 Route::get('/dashboard/debug-gemini', [MenuController::class, 'debugGeminiConfig']); 
 Route::get('/dashboard/prueba-gemini-usuario/{usuarioId}', [MenuController::class, 'pruebaGeminiUsuario']);
-Route::get('/dashboard/buscar-preferencia/{usuarioId}', [MenuController::class, 'buscarPreferencia']);
+Route::get('/dashboard/generar-dieta/{usuarioId}', [MenuController::class, 'generarDieta']);
 
 
 // En routes/web.php

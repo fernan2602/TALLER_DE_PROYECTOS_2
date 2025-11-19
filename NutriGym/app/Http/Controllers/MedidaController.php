@@ -39,16 +39,26 @@ class MedidaController extends Controller
 
         return back()->with('success', '¡Datos registrados correctamente!');
     }
+    
+    public function index()
+    {
+        $registro = auth()->check() && Medida::where('id_usuario', auth()->id())->exists();
+        return view('usuario.cuenta', compact('registro'));
+    }
+
+
 
     public function update(Request $request, $id)
     {
         $medida = Medida::where('id', $id)->where('id_usuario', auth()->id())->firstOrFail();
+        $genero = $medida->genero;
 
         try {
             $validated = $request->validate([
                 'peso' => 'required|numeric|min:30|max:300',
                 'talla' => 'required|numeric|min:100|max:250',
                 'edad' => 'required|integer|min:15|max:100',
+                'genero' => $genero,
                 'circunferencia_brazo' => 'nullable|numeric|min:10|max:100',
                 'circunferencia_antebrazo' => 'nullable|numeric|min:10|max:100',
                 'circunferencia_cintura' => 'nullable|numeric|min:50|max:200',
@@ -71,6 +81,7 @@ class MedidaController extends Controller
                 'peso' => $validated['peso'],
                 'talla' => $validated['talla'],
                 'edad' => $validated['edad'],
+                'genero' => $genero,
                 'circunferencia_brazo' => $validated['circunferencia_brazo'],
                 'circunferencia_antebrazo' => $validated['circunferencia_antebrazo'],
                 'circunferencia_cintura' => $validated['circunferencia_cintura'],
@@ -85,6 +96,7 @@ class MedidaController extends Controller
 
             $mensaje = "Registro creado - sin modificar estado inicial";
         } else {
+
             $medida->update($validated);
 
             $this->calcularYGuardarProgreso($medida);
