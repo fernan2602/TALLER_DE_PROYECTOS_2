@@ -29,19 +29,6 @@
                 </button>
             </div>
 
-            <!-- Botón 4: Ver progreso -->
-            <div class="flex justify-center">
-
-                <button onclick="openProgresoModal()" class="btn-neu w-full text-center flex items-center justify-center"
-                    class="btn-neu bg-purple-500 hover:bg-purple-600 text-white mt-4">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                            </svg>
-                        Ver Progreso del Paciente (ID: )
-                </button>
-
-            </div>        
-        
             <!-- MODAL 1: Ver mis datos -->
             <div id="datosModal" class="fixed inset-0 z-50 hidden">
                 <div class="modal-backdrop fixed inset-0" onclick="closeModal('datosModal')"></div>
@@ -694,59 +681,6 @@
         }
     }
 
-    function cargarProgreso(pacienteId = null) {
-        const loading = document.getElementById('progresoLoading');
-        const data = document.getElementById('progresoData');
-        const error = document.getElementById('progresoError');
-        
-        if (!loading || !data || !error) {
-            console.error('Elementos del modal no encontrados');
-            return;
-        }
-        
-        loading.classList.remove('hidden');
-        data.classList.add('hidden');
-        error.classList.add('hidden');
-
-        let url = '/progreso/datos';
-        if (pacienteId) {
-            url += `/${pacienteId}`;
-        }
-
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(result => {
-                if (result.success) {
-                    renderProgreso(result.data);
-                    loading.classList.add('hidden');
-                    data.classList.remove('hidden');
-                } else {
-                    throw new Error(result.message || 'Error desconocido del servidor');
-                }
-            })
-            .catch(error => {
-                console.error('Error cargando progreso:', error);
-                loading.classList.add('hidden');
-                const errorDiv = document.getElementById('progresoError');
-                if (document.getElementById('errorMessage') && errorDiv) {
-                    document.getElementById('errorMessage').textContent = error.message;
-                    errorDiv.classList.remove('hidden');
-                }
-            });
-    }
-
-    function openProgresoModal(pacienteId = null) {
-        const modal = document.getElementById('progresoModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            cargarProgreso(pacienteId);
-        }
-    }
 
     function closeModal(modalId) {
         const modal = document.getElementById(modalId);
@@ -755,123 +689,6 @@
         }
     }
 
-    function renderProgreso(data) {
-        safeSetText('pesoPerdido', `${data.metricas.pesoPerdido > 0 ? '-' : ''}${Math.abs(data.metricas.pesoPerdido)}kg`);
-        safeSetText('sesionesMes', data.metricas.sesionesMes);
-        safeSetText('asistencia', `${data.metricas.asistencia}%`);
-        safeSetText('incrementoFuerza', `${data.metricas.incrementoFuerza > 0 ? '+' : ''}${data.metricas.incrementoFuerza}%`);
-
-        if (data.historialPeso) {
-            renderPesoChart(data.historialPeso);
-        }
-
-        if (data.metas) {
-            renderMetas(data.metas);
-        }
-
-        renderEstados(data.estadoInicial, data.estadoActual);
-    }
-
-    function safeSetText(elementId, text) {
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.textContent = text;
-        }
-    }
-
-    function renderPesoChart(historialPeso) {
-        const chartContainer = document.getElementById('pesoChart');
-        if (!chartContainer) return;
-        
-        chartContainer.innerHTML = '';
-
-        if (!historialPeso || historialPeso.length === 0) {
-            chartContainer.innerHTML = '<p class="text-gray-500 text-center">No hay datos de peso</p>';
-            return;
-        }
-
-        const pesos = historialPeso.map(item => item.peso).filter(peso => peso != null);
-        if (pesos.length === 0) {
-            chartContainer.innerHTML = '<p class="text-gray-500 text-center">No hay datos válidos de peso</p>';
-            return;
-        }
-
-        const maxPeso = Math.max(...pesos);
-        const minPeso = Math.min(...pesos);
-        const range = maxPeso - minPeso || 1;
-
-        historialPeso.forEach((item) => {
-            if (item.peso == null) return;
-            
-            const height = ((item.peso - minPeso) / range) * 80 + 20;
-            const bar = document.createElement('div');
-            bar.className = 'flex-1 bg-gradient-to-t from-green-400 to-green-600 rounded-t transition-all duration-500';
-            bar.style.height = `${height}%`;
-            bar.title = `${item.peso}kg - ${new Date(item.fecha_registro).toLocaleDateString()}`;
-            chartContainer.appendChild(bar);
-        });
-    }
-
-    function renderMetas(metas) {
-        const metasContainer = document.getElementById('metasList');
-        if (!metasContainer) return;
-        
-        metasContainer.innerHTML = '';
-
-        if (!metas || metas.length === 0) {
-            metasContainer.innerHTML = '<p class="text-gray-500 text-center">No hay metas definidas</p>';
-            return;
-        }
-
-        metas.forEach(meta => {
-            const progressPercentage = Math.min(100, (meta.progreso / meta.objetivo) * 100);
-            
-            const metaElement = document.createElement('div');
-            metaElement.className = 'flex items-center justify-between p-3 neumorphic-inset rounded-lg';
-            metaElement.innerHTML = `
-                <div class="flex items-center flex-1">
-                    <div class="w-3 h-3 rounded-full mr-3 ${meta.completada ? 'bg-green-500' : progressPercentage > 50 ? 'bg-yellow-500' : 'bg-red-500'}"></div>
-                    <span class="text-sm flex-1">${meta.descripcion}</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <div class="w-20 bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-500 h-2 rounded-full transition-all duration-500" style="width: ${progressPercentage}%"></div>
-                    </div>
-                    <span class="text-xs text-gray-600 w-12">${meta.progreso}/${meta.objetivo}</span>
-                </div>
-            `;
-            metasContainer.appendChild(metaElement);
-        });
-    }
-
-    function renderEstados(estadoInicial, estadoActual) {
-        const estadoInicialContainer = document.getElementById('estadoInicial');
-        const estadoActualContainer = document.getElementById('estadoActual');
-
-        if (estadoInicialContainer) {
-            estadoInicialContainer.innerHTML = estadoInicial ? `
-                <div class="space-y-1">
-                    <div><strong>Peso:</strong> ${estadoInicial.peso}kg</div>
-                    <div><strong>Fecha:</strong> ${new Date(estadoInicial.fecha_registro).toLocaleDateString()}</div>
-                    ${estadoInicial.estado_fisico ? `<div><strong>Estado físico:</strong> ${estadoInicial.estado_fisico}</div>` : ''}
-                </div>
-            ` : '<p class="text-gray-500">No hay datos iniciales</p>';
-        }
-
-        if (estadoActualContainer) {
-            estadoActualContainer.innerHTML = estadoActual ? `
-                <div class="space-y-1">
-                    <div><strong>Peso:</strong> ${estadoActual.peso}kg</div>
-                    <div><strong>Fecha:</strong> ${new Date(estadoActual.fecha_registro).toLocaleDateString()}</div>
-                    ${estadoActual.estado_fisico ? `<div><strong>Estado físico:</strong> ${estadoActual.estado_fisico}</div>` : ''}
-                </div>
-            ` : '<p class="text-gray-500">No hay datos actuales</p>';
-        }
-    }
-
-    function exportarReporte() {
-        alert('Función de exportación en desarrollo...');
-    }
 
 
     // Llama a debug cuando se abra cualquier modal

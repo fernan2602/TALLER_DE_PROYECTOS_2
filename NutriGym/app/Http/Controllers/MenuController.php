@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AsignacionMenu;
+use App\Models\MenuAlimento;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 
 class MenuController extends Controller
@@ -71,9 +75,21 @@ class MenuController extends Controller
     }
 
     // Prueba de Gemini con datos de usuario
-    public function generarDieta($usuarioId)
+    public function generarDieta()
     {
         try {
+            // Verificar autenticación
+            if (!auth()->check()) {
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success' => false,
+                        'error' => 'Usuario no autenticado'
+                    ], 401);
+                }
+                return redirect()->route('login');
+            }
+            $usuarioId = auth()->id();
+
             // Obtener datos del usuario
             $usuario = DB::table('usuarios')
                 ->where('id', $usuarioId)
@@ -200,6 +216,8 @@ class MenuController extends Controller
         }
     }
 
+
+
     // AJUSTAR CALORÍAS SEGÚN OBJETIVOS
     private function ajustarCaloriasPorObjetivo($getBase, $objetivos)
     {
@@ -325,6 +343,105 @@ class MenuController extends Controller
         }
         
         return $resultado;
+    }
+
+
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'tipo' => 'required|in:desayuno,almuerzo,cena,otro',
+            'calorias' =>'required|integer',
+            'fecha_asignacion' => 'required|date',
+            'alimentos' => 'required|array',
+            'alimentos.*' => 'exists:alimentos,id'
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            // 1. Primero crear en asignacion_menus
+            $asignacion = AsignacionMenu::create([
+                'id_usuario' => auth()->id(),
+                'tipo' => $request->tipo,
+                'calorias'=>$request->calorias,
+                'fecha_asignacion' => $request->fecha_asignacion
+            ]);
+
+            // 2. Luego guardar los alimentos en menu_alimentos
+            $alimentosData = [];
+            foreach ($request->alimentos as $idAlimento) {
+                $alimentosData[] = [
+                    'asignacion_menu_id' => $asignacion->id,
+                    'id_alimento' => $idAlimento,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
+
+            MenuAlimento::insert($alimentosData);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Menú asignado correctamente',
+                'data' => [
+                    'asignacion' => $asignacion,
+                    'alimentos_count' => count($request->alimentos)
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al asignar el menú: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // Método para obtener menús por usuario
+    public function getMyMenus()
+    {
+        $menus = AsignacionMenu::with('alimentos.alimento')
+            ->where('id_usuario', auth()->id()) // ✅ Solo menús del usuario autenticado
+            ->orderBy('fecha_asignacion', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $menus
+        ]);
+    }
+
+    public function getByUsuario($id)
+    {
+        $menus = AsignacionMenu::with('alimentos.alimento')
+            ->where('id_usuario', $id) // ✅ Solo menús del usuario autenticado
+            ->orderBy('fecha_asignacion', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $menus
+        ]);
+    }
+
+    public function toggleValidacion($id)
+    {
+        $menu = AsignacionMenu::findOrFail($id);
+        
+        // Toggle del campo validado
+        $menu->validado = !$menu->validado;
+        $menu->save();
+        
+        return response()->json([
+            'success' => true,
+            'menu' => $menu
+        ]);
     }
 
 }

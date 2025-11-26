@@ -26,7 +26,7 @@
                 @if(Auth::user()->id_rol== 4)
                 <a href="{{ Route::has('usuario') ? route('usuario') : url('/') }}" class="flex items-center space-x-3">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
-                    <span class="hidden sm:block text-lg font-semibold text-gray-800">NutriGym</span>
+                    <span class="hidden sm:block text-lg font-semibold text-gray-800">Nutrigym</span>
                 </a>
                 @endif
                 @else
@@ -87,18 +87,6 @@
                     <span class="px-4 py-2 text-sm font-medium text-gray-700">
                         👋 Hola Usuario, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                     </span>
-                    
-                    @if(Route::has('preferencia'))
-                        <a href="{{ route('preferencia') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rsounded-lg transition">
-                            👥 Seleccionar preferencia
-                        </a>
-                    @endif
-                    
-                    @if(Route::has('control'))
-                        <a href="{{ route('control') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                            👥 Ver clientes
-                        </a>
-                    @endif
                     
                     @if(Route::has('cuenta'))
                         <a href="{{ route('cuenta') }}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
@@ -192,17 +180,7 @@
                             👋 Hola Usuario, {{ Auth::user()->nombre }} (email: {{ Auth::user()->email}})
                         </span>
                         
-                        @if(Route::has('preferencia'))
-                            <a href="{{ route('preferencia') }}" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                                👥 Seleccionar preferencia
-                            </a>
-                        @endif
-                        
-                        @if(Route::has('control'))
-                            <a href="{{ route('control') }}" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">
-                                👥 Ver clientes
-                            </a>
-                        @endif
+                       
                         
                         @if(Route::has('cuenta'))
                             <a href="{{ route('cuenta') }}" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition">

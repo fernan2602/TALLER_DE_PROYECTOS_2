@@ -45,6 +45,6 @@ public function up(): void
  */
 public function down(): void
 {
-    Schema::dropIfExists('alimentos'); // Corregí esto - debe ser 'alimentos' no 'alimento'
+    Schema::dropIfExists('alimentos'); 
 }
 };

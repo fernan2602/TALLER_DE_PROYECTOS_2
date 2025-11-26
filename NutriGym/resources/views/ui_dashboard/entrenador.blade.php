@@ -626,6 +626,9 @@
         preferenciasContent.innerHTML = html;
     }
 
+
+
+
     function cargarProgreso(pacienteId = null) {
         const loading = document.getElementById('progresoLoading');
         const data = document.getElementById('progresoData');
@@ -801,6 +804,17 @@
         }
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const progresoModal = document.getElementById('progresoModal');
+        if (progresoModal) {
+            progresoModal.addEventListener('click', function(e) {
+                if (e.target === this || e.target.classList.contains('modal-backdrop')) {
+                    cargarProgreso();
+                }
+            });
+        }
+    });
+
     function exportarReporte() {
         alert('Función de exportación en desarrollo...');
     }
@@ -950,16 +964,7 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const progresoModal = document.getElementById('progresoModal');
-        if (progresoModal) {
-            progresoModal.addEventListener('click', function(e) {
-                if (e.target === this || e.target.classList.contains('modal-backdrop')) {
-                    cargarProgreso();
-                }
-            });
-        }
-    });
+
 </script>
 
 

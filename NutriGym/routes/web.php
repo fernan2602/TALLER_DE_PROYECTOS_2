@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\RegistroUsuarioController;
 use App\Http\Controllers\LoginUsuarioController;
 use App\Http\Controllers\PreferenciaController;
@@ -31,14 +32,7 @@ Route::post('/registrar_usuario', [RegistroUsuarioController::class, 'store'])
     ->name('registrar_usuario.store');
 
 
-// Mi cuenta
-Route::get('/cuenta', function() {
-    return view('usuario.cuenta');
-})->name('cuenta');
-
-// Registros medidas 
-
-Route::get('/cuenta', [MedidaController::class, 'index'])->name('index');
+Route::get('/cuenta', [MedidaController::class, 'index'])->name('cuenta');
 
 // Store
 Route::post('/medidas', [MedidaController::class, 'store'])->name('medidas.store');
@@ -94,6 +88,29 @@ Route::get('usuario', function() {
     return view('ui_dashboard.usuario'); // vista de usuario --> autenticado
 })->name('usuario');
 
+// Ruta selección  preferencias y objetivos
+Route::get('/preferencias', [PreferenciaController::class, 'index'])->name('preferencias.index');
+Route::post('/preferencias/guardar', [PreferenciaController::class, 'guardarpreferencias'])->name('preferencias.guardar');
+Route::get('/preferencias/seleccionados', [PreferenciaController::class, 'preferenciasSeleccionados'])->name('preferencias.seleccionados');
+Route::delete('/preferencias/{id}/eliminar', [PreferenciaController::class, 'eliminarPreferencia'])->name('preferencias.eliminar');
+
+Route::get('/objetivos', [ObjetivoController::class, 'index'])->name('objetivos.index');
+Route::post('/objetivos/guardar', [ObjetivoController::class, 'guardarObjetivos'])->name('objetivos.guardar');
+Route::get('/objetivos/seleccionados', [ObjetivoController::class, 'objetivosSeleccionados'])->name('objetivos.seleccionados');
+Route::delete('/objetivos/{id}/eliminar', [ObjetivoController::class, 'eliminarObjetivo'])->name('objetivos.eliminar');
+
+// Ruta seleccion y generacion de menu 
+Route::get('/dashboard/generar-dieta', [MenuController::class, 'generarDieta']);
+Route::post('/menus', [MenuController::class, 'store']);
+Route::get('/menus/mis-menus', [MenuController::class, 'getMyMenus'])->middleware('auth');
+Route::get('/mis-dietas', [MenuController::class, 'getMyMenus'])->name('dietas.mis-dietas');
+
+
+
+
+
+
+
 
 Route::get('nutriologo', function() {
     return view('ui_dashboard.nutriologo'); // vista de nutriologo --> autenticado
@@ -101,6 +118,9 @@ Route::get('nutriologo', function() {
 
 // Para nutriologo
 Route::get('nutriologo', [NutriologoController::class, 'index'])->name('ui_dashboard.nutriologo');
+Route::get('/usuario/{id}/dietas', [MenuController::class, 'getByUsuario'])->name('usuario.dietas');
+Route::post('/menu/{id}/toggle-validacion', [MenuController::class, 'toggleValidacion']);
+
 
 // En routes/web.php - parámetro realmente opcional
 Route::get('/progreso/datos/{pacienteId?}', [ProgresoController::class, 'obtenerProgresoUsuario'])

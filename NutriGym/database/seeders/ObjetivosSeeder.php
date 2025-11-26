@@ -9,7 +9,6 @@ class ObjetivosSeeder extends Seeder
 {
     public function run()  
     {
-      // En tu seeder o migración
         DB::table('objetivos')->insert([
             // OBJETIVOS FÍSICOS
             [

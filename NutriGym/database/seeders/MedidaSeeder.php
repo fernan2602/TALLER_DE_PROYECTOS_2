@@ -19,33 +19,50 @@ class MedidaSeeder extends Seeder
             ->get();
 
         $medidas = [];
+        $meses = 10; // Generar 10 medidas (enero a octubre)
 
         foreach ($usuarios as $usuario) {
-            // Calcular edad basada en fecha_nacimiento
+            // Calcular edad basada en fecha_nacimiento (para la primera medida)
             $fechaNacimiento = Carbon::parse($usuario->fecha_nacimiento);
-            $edad = $fechaNacimiento->age;
+            $edadBase = $fechaNacimiento->age;
 
             // Generar medidas realistas según género y edad
             $genero = $this->generarGeneroAleatorio();
-            
-            $medidas[] = [
-                'id_usuario' => $usuario->id,
-                'peso' => $this->generarPeso($genero, $edad),
-                'talla' => $this->generarTalla($genero),
-                'edad' => $edad,
-                'genero' => $genero,
-                'circunferencia_brazo' => $this->generarCircunferenciaBrazo($genero),
-                'circunferencia_antebrazo' => $this->generarCircunferenciaAntebrazo($genero),
-                'circunferencia_cintura' => $this->generarCircunferenciaCintura($genero),
-                'circunferencia_caderas' => $this->generarCircunferenciaCaderas($genero),
-                'circunferencia_muslos' => $this->generarCircunferenciaMuslos($genero),
-                'circunferencia_pantorrilla' => $this->generarCircunferenciaPantorrilla($genero),
-                'circunferencia_cuello' => $this->generarCircunferenciaCuello($genero),
-                'fecha_registro' => Carbon::now(),
-                'estado_fisico' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+
+            for ($i = 0; $i < $meses; $i++) {
+                // Calcular fecha para cada mes (comenzando desde enero del año actual)
+                $fechaMedida = Carbon::create(null, 1, 1)->addMonths($i); // Enero + i meses
+                
+                // Ajustar la edad según el mes
+                $edad = $edadBase;
+                if ($fechaMedida->month < $fechaNacimiento->month || 
+                    ($fechaMedida->month == $fechaNacimiento->month && $fechaMedida->day < $fechaNacimiento->day)) {
+                    $edad = $edadBase - 1;
+                }
+
+                // Generar medidas con pequeñas variaciones mensuales
+                $pesoBase = $this->generarPeso($genero, $edad);
+                $tallaBase = $this->generarTalla($genero);
+
+                $medidas[] = [
+                    'id_usuario' => $usuario->id,
+                    'peso' => $this->generarPesoConProgreso($pesoBase, $i, $meses),
+                    'talla' => $tallaBase, // La talla generalmente no cambia
+                    'edad' => $edad,
+                    'genero' => $genero,
+                    'circunferencia_brazo' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaBrazo($genero), $i, $meses),
+                    'circunferencia_antebrazo' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaAntebrazo($genero), $i, $meses),
+                    'circunferencia_cintura' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaCintura($genero), $i, $meses),
+                    'circunferencia_caderas' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaCaderas($genero), $i, $meses),
+                    'circunferencia_muslos' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaMuslos($genero), $i, $meses),
+                    'circunferencia_pantorrilla' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaPantorrilla($genero), $i, $meses),
+                    'circunferencia_cuello' => $this->generarCircunferenciaConProgreso($this->generarCircunferenciaCuello($genero), $i, $meses),
+                    'fecha_registro' => $fechaMedida,
+                    'estado_fisico' => 1,
+                    'created_at' => $fechaMedida,
+                    'updated_at' => $fechaMedida,
+                ];
+            }
         }
 
         // Insertar todas las medidas
@@ -54,8 +71,53 @@ class MedidaSeeder extends Seeder
         // CALCULAR PROGRESO PARA CADA MEDIDA CREADA
         $this->calcularProgresoParaTodasLasMedidas();
 
-        $this->command->info('✅ ' . count($medidas) . ' medidas creadas para usuarios con rol 4');
+        $this->command->info('✅ ' . count($medidas) . ' medidas creadas para usuarios con rol 4 (10 por usuario)');
         $this->command->info('✅ Progresos calculados automáticamente para todas las medidas');
+    }
+
+    /**
+     * Generar peso con progreso realista (simula mejora física)
+     */
+    private function generarPesoConProgreso($pesoBase, $mesActual, $totalMeses)
+    {
+        // Simular progreso: pérdida de peso gradual o ganancia muscular
+        $progreso = ($totalMeses - $mesActual) / $totalMeses; // De 1 a 0
+        
+        // Variación de ±5% del peso base
+        $variacion = $pesoBase * 0.05 * $progreso;
+        
+        // Tendencia: generalmente se pierde peso o se redistribuye
+        $nuevoPeso = $pesoBase - $variacion;
+        
+        return max($nuevoPeso, $pesoBase * 0.8); // No menos del 80% del peso original
+    }
+
+    /**
+     * Generar circunferencia con progreso realista
+     */
+    private function generarCircunferenciaConProgreso($circunferenciaBase, $mesActual, $totalMeses)
+    {
+        // Simular cambios realistas en medidas corporales
+        $progreso = ($totalMeses - $mesActual) / $totalMeses;
+        
+        // Variación de ±8% para simular cambios por ejercicio
+        $variacion = $circunferenciaBase * 0.08 * $progreso;
+        
+        // Algunas medidas disminuyen (cintura) y otras aumentan (brazo, muslo)
+        $esMedidaQueAumenta = in_array($circunferenciaBase, [
+            $this->generarCircunferenciaBrazo('M'),
+            $this->generarCircunferenciaBrazo('F'),
+            $this->generarCircunferenciaMuslos('M'),
+            $this->generarCircunferenciaMuslos('F')
+        ]);
+
+        if ($esMedidaQueAumenta) {
+            $nuevaCircunferencia = $circunferenciaBase + $variacion;
+            return min($nuevaCircunferencia, $circunferenciaBase * 1.15); // No más del 115%
+        } else {
+            $nuevaCircunferencia = $circunferenciaBase - $variacion;
+            return max($nuevaCircunferencia, $circunferenciaBase * 0.85); // No menos del 85%
+        }
     }
 
     /**
