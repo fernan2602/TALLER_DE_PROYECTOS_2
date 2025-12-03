@@ -213,33 +213,44 @@
                 
                 <!-- Botones de acción -->
                 <div class="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
-                    @if($usuario->id_rol==4)
-                    <button onclick="openObjetivoModal()" class="btn-neu bg-black-500 hover:bg-blue-600 text-white w-full sm:w-auto text-sm">
-                        Ver objetivos
-                    </button>
-                    <button onclick="openPreferenciaModal()" class="btn-neu bg-red-500 hover:bg-blue-600 text-white w-full sm:w-auto text-sm">
-                        Ver Preferencias
-                    </button>
-                    <button onclick="console.log('🖱️ Botón clickeado, usuario.id:', ${usuario.id}); openProgresoModal(${usuario.id})" 
-                            class="btn-neu bg-purple-500 hover:bg-purple-600 text-white w-full sm:w-auto flex items-center justify-center text-sm">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        Ver Progreso del Paciente (ID: ${usuario.id})
+
+                    ${
+                        usuario.id_rol == 4 
+                        ? `
+                            <button onclick="openObjetivoModal()" 
+                                    class="btn-neu bg-black-500 hover:bg-blue-600 text-white w-full sm:w-auto text-sm">
+                                Ver objetivos
+                            </button>
+
+                            <button onclick="openPreferenciaModal()" 
+                                    class="btn-neu bg-red-500 hover:bg-blue-600 text-white w-full sm:w-auto text-sm">
+                                Ver Preferencias
+                            </button>
+
+                            <button onclick="openProgresoModal(${usuario.id})"
+                                    class="btn-neu bg-purple-500 hover:bg-purple-600 text-white w-full sm:w-auto text-sm">
+                                Ver Progreso del Paciente (ID: ${usuario.id})
+                            </button>
+
+                            <button onclick="openDietasModal(${usuario.id})"
+                                    class="btn-neu bg-green-500 hover:bg-green-600 text-white w-full sm:w-auto text-sm">
+                                Ver Dieta (ID: ${usuario.id})
+                            </button>
+                        `
+                        : `
+                            <button class="btn-neu bg-gray-500 hover:bg-gray-600 text-white w-full sm:w-auto text-sm">
+                                Este usuario no tiene opciones avanzadas
+                            </button>
+                        `
+                    }
+
+                    <button class="btn-neu bg-red-500 hover:bg-red-600 text-white w-full sm:w-auto text-sm">
+                        Eliminar
                     </button>
 
-                    <button onclick="openDietasModal(${usuario.id})" 
-                            class="btn-neu bg-green-500 hover:bg-green-600 text-white w-full sm:w-auto flex items-center justify-center text-sm">
-                        <i class="fas fa-utensils mr-2"></i>
-                        Ver Dieta (ID: ${usuario.id})
-                    </button>
-
-                    @endif
-                        <button class="btn-neu bg-red-500 hover:bg-red-600 text-white w-full sm:w-auto text-sm">
-                            Eliminar
-                        </button>
-                    
                 </div>
+
+
             </div>
         `;
         

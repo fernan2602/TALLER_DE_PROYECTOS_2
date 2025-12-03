@@ -153,7 +153,7 @@
 
             <!-- Error state -->
             <div id="progresoError" class="hidden text-center py-6 md:py-8">
-                <div class="text-red-500 text-base md:text-lg mb-2">❌ Error al cargar el progreso</div>
+                <div class="text-green-500 text-base md:text-lg mb-2">❌ Registre medidas para calcular su progreso</div>
                 <p id="errorMessage" class="text-gray-600 text-sm md:text-base"></p>
                 <button onclick="cargarProgreso()" class="btn-neu bg-blue-500 hover:bg-blue-600 text-white mt-4 text-sm md:text-base px-3 py-1 rounded-md">
                     Reintentar
@@ -1558,7 +1558,7 @@ function cargarProgreso(pacienteId = null) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+                throw new Error(`Para empezar con el progreso registre sus medidas `);
             }
             return response.json();
         })
@@ -1572,7 +1572,7 @@ function cargarProgreso(pacienteId = null) {
             }
         })
         .catch(error => {
-            console.error('Error cargando progreso:', error);
+            console.error('Para empezar con el progreso registre sus medidas', error);
             loading.classList.add('hidden');
             const errorDiv = document.getElementById('progresoError');
             if (document.getElementById('errorMessage') && errorDiv) {

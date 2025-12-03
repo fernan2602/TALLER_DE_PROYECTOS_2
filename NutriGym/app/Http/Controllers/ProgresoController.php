@@ -50,7 +50,7 @@ class ProgresoController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            return $this->errorResponse('Error al cargar el progreso: ' . $e->getMessage(), 500);
+            return $this->errorResponse('Registre medidas');
         }
     }
 
