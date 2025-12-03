@@ -26,6 +26,7 @@ Sistema web desarrollado con Laravel, MySQL, Tailwind CSS y Alpine.js.
 - 
 
 Este README incluye solo la información esencial y las instrucciones básicas para configurar y usar el proyecto con el stack tecnológico especificado.
+Video presentación : https://youtu.be/ePPV_8HxKoo
 
 
 
